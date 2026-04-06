@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unequal Participation · ALIGN | SDG 10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+        
+        .content-page {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .content-page h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+            font-size: 2.5rem;
+            border-left: 5px solid var(--accent-fresh);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .content-page h2 {
+            color: var(--primary);
+            margin: 2rem 0 0.5rem;
+            font-size: 1.6rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .content-page h3 {
+            color: var(--accent-fresh);
+            margin: 1.2rem 0 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .content-page p {
+            margin: 1rem 0;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+        
+        .content-page ul, .content-page ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        .content-page li {
+            margin: 0.5rem 0;
+            color: var(--text-muted);
+        }
+        
+        /* Ordered List Styling */
+        .styled-ol {
+            background: var(--bg-light);
+            border-left: 4px solid var(--accent-fresh);
+            border-radius: 1rem;
+            padding: 1.5rem 1.5rem 1.5rem 3rem;
+            margin: 1.5rem 0;
+            list-style: none;
+            counter-reset: custom-counter;
+        }
+        
+        .styled-ol li {
+            counter-increment: custom-counter;
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+        
+        .styled-ol li::before {
+            content: counter(custom-counter);
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-fresh);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Back Link */
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .back-link:hover {
+            background: var(--accent-fresh);
+            transform: translateX(-5px);
+            color: white;
+        }
+        
+        /* Go to Top Button */
+        .go-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-fresh);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .go-top:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .content-img {
+            width: 100%;
+            max-width: 600px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            display: block;
+            margin: auto;
+        }
+
+      
+        /* Internal Navigation */
+        .internal-nav {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--accent-glow);
+        }
+        
+        .internal-nav h2 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+        }
+        
+        .internal-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 15px;
+        }
+        
+        .internal-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .internal-nav a:hover {
+            color: var(--accent-fresh);
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+            border-left: 4px solid var(--accent-fresh);
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-page { padding: 1.5rem; margin: 1rem; }
+            .go-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            .styled-ol {
+                padding: 1rem 1rem 1rem 2rem;
+            }
+            .content-img {
+                max-width: 100%;
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo - equal access emblem representing digital inclusion" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-page">
+
+        <!-- Internal Navigation Menu -->
+        <div class="internal-nav">
+            <h2>On This Page:</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#loudest-voice">The Loudest Voice Problem</a></li>
+                <li><a href="#left-behind">Who Gets Left Behind?</a></li>
+                <li><a href="#cost">The Cost of Unequal Participation</a></li>
+                <li><a href="#solution">How ALIGN Addresses This</a></li>
+            </ul>
+        </div>
+
+        <h1 id="introduction">Unequal Participation Within Groups</h1>
+
+        <h2>Introduction</h2>
+        <p>Even when collaboration tools are equally available to all members, equality doesn't automatically follow. Group dynamics are deeply influenced by social hierarchies, confidence levels, cultural backgrounds, and personality types. The result? A small number of dominant voices shape decisions, while the majority stay silent — not because they have nothing to contribute, but because the environment doesn't make space for them.</p>
+        
+        <div class="highlight-box">
+            <p><strong>Did You Know?</strong> Research shows that in group settings, the top 20% of participants often contribute 80% of the conversation, leaving the rest unheard.</p>
+        </div>
+
+        <h2 id="loudest-voice">The Loudest Voice Problem</h2>
+        <h3>Why dominant voices take over</h3>
+        <p>In most group settings, whether in classrooms, workplaces, or online platforms, a pattern emerges where a few individuals consistently lead, speak, and decide. This isn't always about knowledge or skill. It's about:</p>
+        
+        <ol class="styled-ol">
+            <li>Confidence</li>
+            <li>Social status</li>
+            <li>Familiarity with tools</li>
+            <li>Cultural norms</li>
+        </ol>
+        
+        <p>The rest of the group gradually disengages, assuming their input isn't valued or needed. This creates a cycle where the loudest voices become even louder, and quieter voices fade away completely.</p>
+        <img id="img-meeting" class="content-img" src="meetingdom.jpeg" alt="Dominating speaker in a meeting">
+
+        <h2 id="left-behind">Who Gets Left Behind?</h2>
+        <h3>The profiles of underrepresented group members</h3>
+        <p>Unequal participation doesn't affect everyone equally. Certain people are consistently more likely to be sidelined:</p>
+        
+        <ol class="styled-ol">
+            <li>Introverts</li>
+            <li>Minority group members</li>
+            <li>Non-native speakers</li>
+            <li>Students with anxiety</li>
+            <li>Remote or asynchronous participants</li>
+        </ol>
+        
+        <p>Each of these groups brings valuable perspective, but traditional group formats make it hard for them to be heard. When we lose these voices, we lose diverse ideas and solutions.</p>
+        <img id="img-introvert" class="content-img" src="introvert.jpeg" alt="Introvert getting left behind in a team">
+
+        <h2 id="cost">The Cost of Unequal Participation</h2>
+        <h3>What we lose when voices are missing</h3>
+        <p>This isn't just a fairness issue, it's a quality issue. When groups don't hear from everyone:</p>
+        
+        <ol class="styled-ol">
+            <li>Decisions are poorer</li>
+            <li>Innovation suffers</li>
+            <li>Members disengage</li>
+            <li>Inequality deepens</li>
+        </ol>
+        
+        <p>Research consistently shows that the most effective teams are those where participation is balanced and psychological safety is high. When everyone feels safe to speak, teams perform better and create better solutions.</p>
+        <img id="img-idealoss" class="content-img" src="idealoss.jpeg" alt="A team failing to collaborate due to unequal participation">
+
+        <h2 id="solution">How ALIGN Addresses This</h2>
+        <h3>The platform solution</h3>
+        <p>ALIGN is designed from the ground up to counteract unequal participation:</p>
+        
+        <ol class="styled-ol">
+            <li><strong>Anonymous input options</strong> - Share ideas without fear of judgment</li>
+            <li><strong>Equal turn structures</strong> - Everyone gets a chance to speak</li>
+            <li><strong>Async collaboration</strong> - Participate when you're most comfortable</li>
+            <li><strong>Visibility tools</strong> - Ensure all contributions are seen</li>
+            <li><strong>Inclusive design</strong> - Built for diverse needs and abilities</li>
+        </ol>
+        
+        <p>By building fairness into the tool itself, ALIGN doesn't rely on individuals to police their own behaviour , it creates the conditions for equal participation by default.</p>
+        
+        <div class="highlight-box">
+            <p><strong>Unequal participation is one of the most invisible forms of inequality</strong> , it happens in every group, every day, and most people don't even notice it. ALIGN exists to change that. Because real collaboration only happens when every voice is not just present, but genuinely heard.</p>
+        </div>
+        
+        <p>Reducing unequal participation is essential for achieving <strong>SDG 10: Reduced Inequalities</strong>. When everyone has an equal opportunity to contribute, we create better solutions, stronger communities, and a more equitable world.</p>
+        <img id="img-online" class="content-img" src="online.jpeg" alt="A team collaborating happily with digital tools">
+
+        <a href="home.html" class="back-link">Back to Home Page</a>
+    </main>
+    
+    <a href="#" class="go-top" aria-label="Go to top">↑</a>
+    
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials" role="region" aria-label="Social media links">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal &amp; Support</h3>
+                <p><a href="pageEditor_ST4.html">Page Editor</a></p>
+                <p><a href="validation_ST4.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> Olu Wadigasinghe</p>
+                    <p><strong>Student ID:</strong> 20250697</p>
+                    <p><strong>Course:</strong> Web Design and Development</p>
+                    <p><strong>Role:</strong> User Profile, Sitemap, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

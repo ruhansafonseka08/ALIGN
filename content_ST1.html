@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIGN-Content ST1| Reducing Inequality</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-page {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+        .content-page h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+            font-size: 2.5rem;
+            border-left: 5px solid var(--accent-fresh);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .content-page h2 {
+            color: var(--primary);
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.6rem;
+        }
+        .content-page h3 {
+            color: var(--accent-fresh);
+            margin: 1.2rem 0 0.5rem;
+            font-size: 1.3rem;
+        }
+        .content-page p {
+            margin: 1rem 0;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+        .content-page ul, .content-page ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        .content-page li {
+            margin: 0.5rem 0;
+            color: var(--text-muted);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .back-link:hover {
+            background: var(--accent-fresh);
+            transform: translateX(-5px);
+            color: white;
+        }
+        .go-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-fresh);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            z-index: 9999;
+        }
+        .go-top:hover {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .img-float-left {
+            float: left;
+            margin: 0 1.5rem 1rem 0;
+            max-width: 350px;
+            width: 100%;
+        }
+        .img-float-left img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .img-float-left figcaption {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 0.3rem;
+            color: var(--text-muted);
+        }
+        .img-float-right {
+            float: right;
+            margin: 0 0 1rem 1.5rem;
+            max-width: 350px;
+            width: 100%;
+        }
+        .img-float-right img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .img-float-right figcaption {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 0.3rem;
+            color: var(--text-muted);
+        }
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .two-column > div {
+            flex: 1;
+            min-width: 250px;
+        }
+        .internal-nav {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--accent-glow);
+        }
+        .internal-nav h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        .internal-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .internal-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .internal-nav a:hover {
+            color: var(--accent-fresh);
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+            border-left: 4px solid var(--accent-fresh);
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+        }
+        .stat-badge {
+            display: inline-block;
+            background: var(--accent-fresh);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .img-float-left, .img-float-right {
+                float: none;
+                margin: 1rem auto;
+                max-width: 100%;
+            }
+            .content-page { padding: 1.5rem; margin: 1rem; }
+            .go-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            .two-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-page">
+        <div class="internal-nav">
+            <h3>📑 On This Page:</h3>
+            <ul>
+                <li><a href="#overview">What is the Digital Divide?</a></li>
+                <li><a href="#education">Impact on Education</a></li>
+                <li><a href="#healthcare">Impact on Healthcare</a></li>
+                <li><a href="#statistics">Key Statistics</a></li>
+                <li><a href="#affected">Who Does It Affect?</a></li>
+                <li><a href="#solutions">Solutions We Support</a></li>
+                <li><a href="#actions">What You Can Do Today</a></li>
+            </ul>
+        </div>
+
+        <h1 id="overview">Bridging the Digital Divide</h1>
+        
+        <!-- FIXED: Using figure tag instead of div with figcaption -->
+        <figure class="img-float-right">
+            <img src="Connectivity%20gap.jpg" alt="Digital divide illustration showing connectivity gap between urban and rural areas">
+            <figcaption>The connectivity gap between urban and rural communities</figcaption>
+        </figure>
+        
+        <p>The <strong>digital divide</strong> can be defined as the gap that separates those who have access to modern digital technologies such as the internet, computers, and smartphones from those who do not have access to them. This gap creates significant inequalities in <strong>education</strong>, <strong>healthcare</strong>, employment, and social participation.</p>
+        
+        <div class="highlight-box">
+            <p>📢 <strong>Did You Know?</strong> It is estimated that there are approximately 3 billion people in the world who do not have access to the internet.</p>
+        </div>
+        
+        <p>In the modern digital world, connectivity is not a luxury; it is a necessity. Those who do not have access to connectivity face barriers to basic services and opportunities, reinforcing existing social and economic inequalities.</p>
+        
+        <div class="clearfix"></div>
+        
+        <h2 id="education">Impact on Education</h2>
+        
+        <!-- FIXED: Using figure tag instead of div with figcaption -->
+        <figure class="img-float-left">
+            <img src="No%20Internet.jpg" alt="Students struggling without internet access for online education">
+            <figcaption>Millions of students across the globe without internet access for education</figcaption>
+        </figure>
+        
+        <p>The digital divide has resulted in an <strong>education crisis</strong> with millions of students affected globally. During the pandemic, schools were forced to close, and students without internet access at home were not able to engage in online learning and had fallen behind in their studies.</p>
+        
+        <ul>
+            <li><strong>Homework Gap:</strong> 1 in 3 students cannot complete online homework due to lack of internet access</li>
+            <li><strong>Digital Skills:</strong> Students without internet access are falling behind in basic digital literacy skills required for the future workforce</li>
+            <li><strong>Higher Education:</strong> Students without home internet are 20% less likely to pursue higher education in college or university</li>
+            <li><strong>Remote Learning:</strong> During the COVID-19 pandemic, over 1.3 billion children were not able to engage in remote learning</li>
+        </ul>
+        
+        <div class="clearfix"></div>
+        
+        <h2 id="healthcare">Impact on Healthcare</h2>
+        
+        <!-- FIXED: Using figure tag instead of div with figcaption -->
+        <figure class="img-float-right">
+            <img src="Affected.jpg" alt="Telehealth and remote healthcare access challenges">
+            <figcaption>Telehealth is not accessible to those without access to the internet</figcaption>
+        </figure>
+        
+        <p>The digital divide has evolved to become a <strong>healthcare divide</strong>. With more and more healthcare services being offered online, those without access to the internet are being left behind in accessing basic healthcare services.</p>
+        
+        <ul>
+            <li><strong>Telehealth Access:</strong> Those without access to the internet cannot access telehealth and remote doctor visits</li>
+            <li><strong>Medical Information:</strong> Those without access to online information cannot manage their illnesses</li>
+            <li><strong>Mental Health Services:</strong> Those without access to online information cannot access mental health support</li>
+            <li><strong>Prescription Management:</strong> Those without access to online information cannot manage their medication</li>
+            <li><strong>Health Monitoring:</strong> Those without access to online information cannot manage illnesses such as diabetes and heart disease</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>⚠️ <strong>The Healthcare Gap:</strong> A study showed that patients without access to broadband internet were 30% more likely to delay healthcare due to lack of access to telehealth services.</p>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <h2 id="statistics">Key Statistics That Matter</h2>
+        <ul>
+            <li><span class="stat-badge">Global</span> <strong>2.9 billion people</strong> have never used the internet (ITU, 2024)</li>
+            <li><span class="stat-badge">Rural</span> Rural areas are <strong>2 times more likely</strong> to have no broadband coverage</li>
+            <li><span class="stat-badge">Education</span> Students without home internet are <strong>20% less likely</strong> to pursue higher education</li>
+            <li><span class="stat-badge">Healthcare</span> Patients without broadband are <strong>30% more likely</strong> to delay medical care</li>
+            <li><span class="stat-badge">Youth</span> Over <strong>1.3 billion children</strong> lack internet connection at home (UNICEF)</li>
+            <li><span class="stat-badge">Telehealth</span> <strong>1 in 5</strong> rural Americans cannot access telehealth services due to lack of broadband connectivity</li>
+        </ul>
+        
+        <h2 id="affected">⚠️ Who Does the Digital Divide Affect Most?</h2>
+        
+        <h3>Rural Communities</h3>
+        <p>Rural areas lack the infrastructure for high-speed internet connectivity. Rural residents are unable to access the benefits of the internet due to the lack of connectivity. They are also unable to access telemedicine, online education, and remote work opportunities.</p>
+        
+        <h3>Low-Income Households</h3>
+        <p>For low-income households, the cost of accessing the internet is too high. They are unable to afford the cost of accessing the internet. The low-income population is also unable to access education and healthcare services due to the lack of the internet.</p>
+        
+        <h3>Elderly Populations</h3>
+        <p>Elderly populations are also affected by the digital divide. They are not only lacking the knowledge of how to access the internet, but they are also in need of telehealth services.</p>
+        
+        <h3>Developing Nations</h3>
+        <p>In developing countries, there are few infrastructures and data costs are also high, which makes it difficult for people to access online education and healthcare information.</p>
+        
+        <h2 id="solutions">💡 Solutions We Support</h2>
+        
+        <div class="two-column">
+            <div>
+                <figure class="content-img" style="margin:0; text-align:center;">
+                    <img src="Solution.jpg" alt="Community digital inclusion and connectivity solutions" style="width:100%; border-radius:1rem;">
+                    <figcaption>Working together to bridge the digital divide</figcaption>
+                </figure>
+            </div>
+            <div>
+                <ul>
+                    <li><strong>Investment in Infrastructure:</strong> Expanding internet access in rural and underserved areas</li>
+                    <li><strong>Affordable Access:</strong> Subsidized internet plans for low-income families</li>
+                    <li><strong>Community Internet Access:</strong> Providing free internet access in libraries and community spaces</li>
+                    <li><strong>Digital Literacy:</strong> Providing digital literacy education for all ages</li>
+                    <li><strong>Telehealth Support:</strong> Programs to support patients in accessing telehealth services</li>
+                    <li><strong>Device Distribution:</strong> Providing devices to students and patients in need</li>
+                    <li><strong>Public-Private Partnerships:</strong> Working with other organizations to expand internet access</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2 id="actions">What You Can Do Today?</h2>
+        <ol>
+            <li><strong>Donate your used devices</strong> to schools, libraries, and healthcare facilities</li>
+            <li><strong>Volunteer</strong> to teach digital skills to seniors in your community</li>
+            <li><strong>Advocate</strong> in your community for affordable internet and telehealth access</li>
+            <li><strong>Support organizations</strong> working to close the digital divide in education and healthcare</li>
+            <li><strong>Mentor a student</strong> or help a senior access telehealth services</li>
+            <li><strong>Help spread the word</strong> and increase awareness about the digital divide</li>
+        </ol>
+        
+        <div class="highlight-box">
+            <p>🌱 <strong>Together, we can build a more connected and equitable world.</strong> When everyone has access to digital opportunities for education and healthcare, we can all benefit from a healthier and more educated population.</p>
+        </div>
+        
+        <p>Closing the digital divide is one important step in achieving <strong>SDG 10: Reduced Inequalities</strong>. When everyone has equal access to technology, education, and healthcare opportunities, we can build a more equitable society that does not depend on location, income levels, and background.</p>
+        
+        <a href="home.html" class="back-link">⬅ Back to Home Page</a>
+    </main>
+    
+    <a href="#" class="go-top" aria-label="Go to top">↑</a>
+    
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST1.html">Page Editor</a></p>
+                <p><a href="validation_ST1.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> K.W.R.P Fonseka</p>
+                    <p><strong>Student ID:</strong> 20240786</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> Template, Home Page, Gallery, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

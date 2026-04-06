@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIGN-Home | Reducing Inequality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link to shared CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ============================================
+           HOME PAGE SPECIFIC STYLES
+        ============================================ */
+        
+        /* Rule 1: Hero section with light green gradient */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            margin: 0 1rem 2rem;
+            border-radius: 2rem;
+        }
+        
+        /* Rule 2: Hero heading with fade-in animation */
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            animation: gentleRise 0.8s ease;
+        }
+        
+        @keyframes gentleRise {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Rule 3: Enhanced card hover effect */
+        .cards-container .card {
+            transition: all 0.4s ease;
+        }
+        
+        .cards-container .card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-fresh);
+        }
+        
+        /* Rule 4: CTA button pulse animation */
+        .cta button {
+            animation: softPulse 2.2s infinite;
+        }
+        
+        @keyframes softPulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+        
+        /* Additional home page styles */
+        .hero-sub {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2E7D32;
+            margin: 0.5rem 0;
+        }
+        
+        .hero-sub2 {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+        
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .cards-container .card {
+            background: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: 1.5rem;
+            width: 260px;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            display: block;
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cards-container .card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+        
+        .cards-container .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .mission-grid {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .mission-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: var(--white);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .mission-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mission-item.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .mission-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .mission-image img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s;
+        }
+        
+        .mission-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        .mission-content {
+            flex: 2;
+        }
+        
+        .mission-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .mission-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .mission-content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        .mission-content li {
+            margin: 0.5rem 0;
+            color: var(--text-muted);
+        }
+        
+        .actions-outcomes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .actions-box, .outcomes-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+        
+        .actions-box h3, .outcomes-box h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin: 2rem 1rem;
+            border-radius: 2rem;
+        }
+        
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .cta p {
+            color: var(--accent-glow);
+        }
+        
+        .cta button {
+            background: var(--accent-fresh);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .cta button:hover {
+            transform: scale(1.05);
+            background: #2E7D32;
+            color: white;
+            animation: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-sub { font-size: 1.2rem; }
+            .hero-sub2 { font-size: 1rem; }
+            .cards-container { gap: 1rem; }
+            .cards-container .card { width: 90%; max-width: 280px; }
+            .mission-item { flex-direction: column; text-align: center; }
+            .mission-item.reverse { flex-direction: column; }
+            .actions-outcomes { grid-template-columns: 1fr; }
+            .cta h2 { font-size: 1.5rem; }
+            .cta { padding: 2rem 1rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero { padding: 2rem 1rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .cards-container .card { padding: 1.2rem; }
+            .cards-container .card h2 { font-size: 1.1rem; }
+            .mission-content h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - from shared CSS -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo" onerror="this.src='https://placehold.co/48x48/4CAF50/white?text=A'">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html" class="active-nav">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-label="Hero section with mission statement">
+            <h1>Bridging the Digital Divide</h1>
+            <p class="hero-sub">Equality Isn't a Dream!</p>
+            <p class="hero-sub2">It's a Choice We Make Together.</p>
+        </section>
+
+        <!-- Interactive Cards linking to Content Pages -->
+        <div class="cards-container" role="region" aria-label="Interactive gallery linking to content pages">
+            <a href="content_ST1.html" class="card">
+                <div class="card-icon" aria-hidden="true">🌍</div>
+                <h2>Digital Divide</h2>
+                <p>Lack of internet and devices limits opportunities for millions worldwide.</p>
+            </a>
+            <a href="content_ST2.html" class="card">
+                <div class="card-icon" aria-hidden="true">💸</div>
+                <h2>Cost Barriers</h2>
+                <p>Expensive tools restrict access for low-income communities.</p>
+            </a>
+            <a href="content_ST3.html" class="card">
+                <div class="card-icon" aria-hidden="true">🗣️</div>
+                <h2>Language Barriers</h2>
+                <p>English-only tools exclude millions of global users.</p>
+            </a>
+            <a href="content_ST4.html" class="card">
+                <div class="card-icon" aria-hidden="true">👥</div>
+                <h2>Unequal Participation</h2>
+                <p>Some voices dominate while others are left unheard.</p>
+            </a>
+        </div>
+
+        <!-- Mission Section with Images -->
+        <div class="mission-grid">
+            <!-- Our Mission -->
+            <div class="mission-item">
+                <div class="mission-image">
+                    <img src="mission.PNG" alt="Our Mission - ALIGN promoting digital inclusion" onerror="this.src='https://placehold.co/300x200/4CAF50/white?text=Our+Mission'">
+                </div>
+                <div class="mission-content">
+                    <h2>Our Mission</h2>
+                    <p>ALIGN promotes inclusive digital collaboration by improving accessibility, affordability, and equal participation. We aim to reduce barriers by supporting equal access to digital tools, encouraging multilingual platforms, and ensuring everyone can participate in the digital world.</p>
+                </div>
+            </div>
+
+            <!-- Why Digital Inequality Matters -->
+            <div class="mission-item reverse">
+                <div class="mission-image">
+                    <img src="matters.PNG" alt="Why Digital Inequality Matters" onerror="this.src='https://placehold.co/300x200/81C784/white?text=Why+It+Matters'">
+                </div>
+                <div class="mission-content">
+                    <h2>Why Digital Inequality Matters</h2>
+                    <p>Digital inequality creates gaps in education, healthcare, and economic opportunities worldwide. It disproportionately affects low-income households, rural communities, and marginalized groups, deepening social and economic inequality — directly linked to SDG 10: Reduced Inequalities.</p>
+                </div>
+            </div>
+
+            <!-- Who It's For -->
+            <div class="mission-item">
+                <div class="mission-image">
+                    <img src="cooperation.PNG" alt="Who It's For - Communities working together" onerror="this.src='https://placehold.co/300x200/2D5A2D/white?text=Who+It+s+For'">
+                </div>
+                <div class="mission-content">
+                    <h2>Who It's For</h2>
+                    <p>Students, educators, local communities, and anyone facing barriers to digital access — particularly those in rural areas, low-income households, and underrepresented groups.</p>
+                </div>
+            </div>
+
+            <!-- 3 Actions and 3 Outcomes -->
+            <div class="mission-item reverse">
+                <div class="mission-image">
+                    <img src="outcomes.jpg" alt="Actions and Outcomes for digital equality" onerror="this.src='https://placehold.co/300x200/A5D6A7/white?text=Actions+Outcomes'">
+                </div>
+                <div class="mission-content">
+                    <h2>Actions & Outcomes</h2>
+                    <div class="actions-outcomes">
+                        <div class="actions-box">
+                            <h3>🌟 3 Actions You Can Take</h3>
+                            <ul>
+                                <li>Advocate for affordable internet in your community</li>
+                                <li>Support digital literacy programs for underserved groups</li>
+                                <li>Create or share multilingual digital resources</li>
+                            </ul>
+                        </div>
+                        <div class="outcomes-box">
+                            <h3>🎯 3 Outcomes If We Act Together</h3>
+                            <ul>
+                                <li>Equal educational opportunities for all students</li>
+                                <li>Economic empowerment through digital inclusion</li>
+                                <li>Stronger, more connected communities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action Section -->
+        <section class="cta" aria-label="Call to action to join ALIGN">
+            <h2>Join Us in Creating Change</h2>
+            <p>Be part of building a more equal digital world.</p>
+            <button onclick="location.href='gallery.html'" aria-label="Explore the gallery">Explore Our Gallery →</button>
+        </section>
+    </main>
+    
+    <!-- Go to Top Button - from shared CSS -->
+    <a href="#" class="go-top" aria-label="Go to top" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">↑</a>
+
+    <!-- FOOTER - from shared CSS -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST1.html">Page Editor</a></p>
+                <p><a href="validation_ST1.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> K.W.R.P Fonseka</p>
+                    <p><strong>Student ID:</strong> 20240786</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> Template, Home Page, Gallery, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get Involved button alert
+        const getInvolvedBtn = document.querySelector('.outline-btn');
+        if (getInvolvedBtn) {
+            getInvolvedBtn.addEventListener('click', () => {
+                alert('Thank you for your interest! Please visit our Impact Simulator or Gallery to learn how you can contribute.');
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Language &amp; Literacy Barriers — SDG 10 | ALIGN</title>
+
+  <!-- Google Fonts - Same as Student 1 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ============================================
+       CONTENT PAGE SPECIFIC STYLES (Same as Student 1)
+       ============================================ */
+    
+    .content-page {
+        max-width: 1000px;
+        margin: 2rem auto;
+        background: white;
+        border-radius: 2rem;
+        padding: 2.5rem;
+        box-shadow: var(--shadow-md);
+    }
+    .content-page h1 {
+        font-family: 'Playfair Display', serif;
+        color: var(--primary-dark);
+        font-size: 2.5rem;
+        border-left: 5px solid var(--accent-fresh);
+        padding-left: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .content-page h2 {
+        color: var(--primary);
+        margin: 1.5rem 0 0.5rem;
+        font-size: 1.6rem;
+    }
+    .content-page h3 {
+        color: var(--accent-fresh);
+        margin: 1.2rem 0 0.5rem;
+        font-size: 1.3rem;
+    }
+    .content-page p {
+        margin: 1rem 0;
+        line-height: 1.7;
+        color: var(--text-muted);
+    }
+    .content-page ul, .content-page ol {
+        margin: 1rem 0 1rem 2rem;
+    }
+    .content-page li {
+        margin: 0.5rem 0;
+        color: var(--text-muted);
+    }
+    .back-link {
+        display: inline-block;
+        margin-top: 2rem;
+        background: var(--primary);
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border-radius: 40px;
+        text-decoration: none;
+        transition: var(--transition);
+    }
+    .back-link:hover {
+        background: var(--accent-fresh);
+        transform: translateX(-5px);
+        color: white;
+    }
+    .go-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--accent-fresh);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 24px;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
+        z-index: 9999;
+    }
+    .go-top:hover {
+        transform: scale(1.1);
+        background: var(--primary);
+        color: white;
+    }
+    
+    /* Centered image styling */
+    .img-centered {
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+    .img-centered img {
+        max-width: 100%;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+    .img-centered figcaption {
+        font-size: 0.7rem;
+        text-align: center;
+        margin-top: 0.3rem;
+        color: var(--text-muted);
+    }
+    
+    .img-float-left {
+        float: left;
+        margin: 0 1.5rem 1rem 0;
+        max-width: 350px;
+        width: 100%;
+    }
+    .img-float-left img {
+        width: 100%;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+    .img-float-left figcaption {
+        font-size: 0.7rem;
+        text-align: center;
+        margin-top: 0.3rem;
+        color: var(--text-muted);
+    }
+    .img-float-right {
+        float: right;
+        margin: 0 0 1rem 1.5rem;
+        max-width: 350px;
+        width: 100%;
+    }
+    .img-float-right img {
+        width: 100%;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+    .img-float-right figcaption {
+        font-size: 0.7rem;
+        text-align: center;
+        margin-top: 0.3rem;
+        color: var(--text-muted);
+    }
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    .two-column {
+        display: flex;
+        gap: 2rem;
+        margin: 1.5rem 0;
+        flex-wrap: wrap;
+    }
+    .two-column > div {
+        flex: 1;
+        min-width: 250px;
+    }
+    .internal-nav {
+        background: var(--bg-light);
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+        border: 1px solid var(--accent-glow);
+    }
+    .internal-nav h3 {
+        margin-bottom: 0.5rem;
+        color: var(--primary-dark);
+    }
+    .internal-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .internal-nav a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+    }
+    .internal-nav a:hover {
+        color: var(--accent-fresh);
+    }
+    .highlight-box {
+        background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+        border-left: 4px solid var(--accent-fresh);
+        padding: 1.2rem;
+        border-radius: 1rem;
+        margin: 1.5rem 0;
+    }
+    .stat-badge {
+        display: inline-block;
+        background: var(--accent-fresh);
+        color: white;
+        padding: 0.2rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+    }
+    @media (max-width: 768px) {
+        .img-float-left, .img-float-right {
+            float: none;
+            margin: 1rem auto;
+            max-width: 100%;
+        }
+        .content-page { padding: 1.5rem; margin: 1rem; }
+        .go-top {
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+        }
+        .two-column {
+            flex-direction: column;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER - Same as Student 1 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo">
+        <span class="brand-name">ALIGN</span>
+        <span class="tagline">SDG 10 · Reduce Inequalities</span>
+      </div>
+      <nav class="navbar" aria-label="Main navigation">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html">Impact Simulator</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="profile.html">User Profile</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <!-- Internal Navigation Menu -->
+    <div class="internal-nav">
+      <h3>On This Page:</h3>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#problem">The Problem</a></li>
+        <li><a href="#education">Impact on Education</a></li>
+        <li><a href="#healthcare">Impact on Healthcare</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#take-action">Take Action</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </div>
+
+    <h1 id="introduction">Breaking Down Language &amp; Literacy Barriers: A Path Towards Equality</h1>
+
+    <!-- First Image - Centered -->
+    <figure class="img-centered">
+      <img src="images/reading_book.jpeg" alt="A person reading a book, representing the importance of literacy in reducing inequality" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Literacy+Matters'">
+      <figcaption>Literacy is the key to participation in modern society</figcaption>
+    </figure>
+
+    <p>Language is the foundation of human connection — it shapes how we learn, how we access services, and how we participate in society. Yet for millions of people around the world, language and literacy barriers create invisible walls that lock them out of education, healthcare, employment, and equal opportunities. This is one of the most overlooked dimensions of inequality addressed by SDG 10.</p>
+
+    <p>Literacy is not simply the ability to read and write — it is the key to participation in modern society. When people cannot read a contract, understand a medical prescription, navigate a government website, or communicate in the dominant language of their country, they are systematically excluded from the opportunities that others take for granted.</p>
+
+    <p>SDG 10 — Reducing Inequalities — calls us to address these deep structural barriers. Language and literacy inequality is not just an individual failing; it is a social problem rooted in history, policy, and power. Recognising this is the first step toward change.</p>
+
+    <div class="clearfix"></div>
+
+    <h2 id="problem">⚠️ Understanding the Scale of Language &amp; Literacy Inequality</h2>
+
+    <p>According to UNESCO, approximately 773 million adults worldwide lack basic literacy skills — the majority of whom are women. In many developing countries, minority language speakers and indigenous communities face the additional barrier of being educated or served in a language that is not their mother tongue, making learning and access even harder.</p>
+
+    <p>Language barriers do not only affect people in developing nations. Immigrants, refugees, and minority communities in wealthy countries also face profound exclusion. A person who speaks limited English in the United Kingdom, or limited French in Canada, may struggle to access legal services, understand their rights, or communicate with healthcare providers — regardless of how intelligent or capable they are.</p>
+
+    <p>Illiteracy and language barriers compound other forms of inequality — making it harder for affected individuals to escape poverty, access justice, or participate in democratic processes. They create a cycle that is difficult to break without deliberate, sustained intervention.</p>
+
+    <!-- Image 2 - Floating Left -->
+    <figure class="img-float-left">
+      <img src="images/child_learning_literacy_barriers.jpeg" alt="Children in a classroom learning, highlighting the need to address literacy barriers from an early age" onerror="this.src='https://placehold.co/600x400/81C784/white?text=Early+Literacy'">
+      <figcaption>Addressing literacy barriers from an early age is crucial</figcaption>
+    </figure>
+
+    <div class="highlight-box">
+      <p><strong>Key Facts About Literacy Inequality</strong></p>
+      <ul>
+        <li>773 million adults globally cannot read or write — two-thirds of them are women.</li>
+        <li>Around 250 million children are failing to acquire basic literacy skills even after years of schooling.</li>
+        <li>Minority language speakers are significantly more likely to drop out of school early.</li>
+        <li>Immigrants with limited host-country language skills earn up to 40% less than fluent speakers.</li>
+      </ul>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <h2 id="education">How Language Barriers Widen the Education Gap</h2>
+
+    <p>Education systems around the world often operate in a single dominant language — typically the language of the colonial power or the national majority. For children whose home language is different, school becomes a place of confusion and exclusion rather than learning and growth. Studies consistently show that children learn best in their mother tongue, especially in the early years of schooling.</p>
+
+    <p>When children are taught in a language they do not understand at home, they fall behind in foundational skills like reading comprehension and numeracy. Teachers who are not trained to support multilingual learners often lack the tools to bridge this gap. As a result, children from linguistic minority communities drop out at higher rates, have lower academic achievement, and face greater barriers to higher education and employment.</p>
+
+    <p>Literacy is also deeply tied to confidence. A child who struggles to read in a language that is not their own may begin to believe they are incapable of learning — carrying that damaging belief into adulthood. Addressing language barriers in education is not just about teaching vocabulary; it is about restoring dignity, confidence, and the right to learn.</p>
+
+    <div class="two-column">
+      <div>
+        <figure>
+          <img src="images/books_in_multiple_languages.jpeg" alt="A stack of books in multiple languages, representing multilingual education resources" style="width:100%; border-radius:1rem;" onerror="this.src='https://placehold.co/600x400/2D5A2D/white?text=Multilingual+Books'">
+          <figcaption style="font-size:0.7rem; margin-top:0.3rem;">Multilingual education resources</figcaption>
+        </figure>
+      </div>
+      <div>
+        <figure>
+          <img src="images/teacher_working_with_students.jpeg" alt="A teacher working with young students in a classroom" style="width:100%; border-radius:1rem;" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Teacher+Support'">
+          <figcaption style="font-size:0.7rem; margin-top:0.3rem;">Supporting early literacy development</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>💡 <strong>Solutions for Education</strong></p>
+      <ul>
+        <li>Introduce mother-tongue-based multilingual education in early schooling years.</li>
+        <li>Train teachers in multilingual and culturally responsive teaching methods.</li>
+        <li>Develop and distribute learning materials in local and minority languages.</li>
+        <li>Create adult literacy programmes that respect learners' existing language skills.</li>
+      </ul>
+    </div>
+
+    <h2 id="healthcare">🩺 When Language Barriers Cost Lives: Inequality in Healthcare</h2>
+
+    <p>Language barriers in healthcare are a matter of life and death. When a patient cannot communicate their symptoms clearly to a doctor, or when they cannot understand a diagnosis or medication instructions, the consequences can be fatal. Studies have shown that patients with limited proficiency in the dominant language receive lower quality care, experience more medical errors, and have worse health outcomes than fluent speakers.</p>
+
+    <p>Imagine being in pain and unable to explain where it hurts. Imagine receiving a cancer diagnosis in a language you barely understand, with no one to help you process what it means or what to do next. For millions of immigrants, refugees, and minority language speakers, this is not a hypothetical — it is a daily reality.</p>
+
+    <p>Low literacy also compounds healthcare inequality. Patients who cannot read written instructions, consent forms, or medication labels are at a significant disadvantage. Public health campaigns — about vaccines, disease prevention, mental health — often fail to reach the communities that need them most because the information is only available in the dominant language or at a reading level that excludes many adults.</p>
+
+    <figure class="img-float-right">
+      <img src="images/consulting_patient.jpeg" alt="A healthcare worker consulting with a patient, illustrating the critical need for language support in medical settings" onerror="this.src='https://placehold.co/600x400/81C784/white?text=Healthcare+Support'">
+      <figcaption>Language support in healthcare is critical</figcaption>
+    </figure>
+
+    <div class="highlight-box">
+      <p><strong>Solutions for Healthcare</strong></p>
+      <ul>
+        <li>Provide professional medical interpreters and translation services in hospitals and clinics.</li>
+        <li>Develop multilingual health information materials and easy-read resources for low-literacy patients.</li>
+        <li>Train healthcare workers in cultural competency and communication with language-diverse patients.</li>
+        <li>Use visual aids, diagrams, and pictorial instructions alongside written medical guidance.</li>
+      </ul>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <h2 id="solutions">💡 Practical Solutions to Break Down Language &amp; Literacy Barriers</h2>
+
+    <h3>Technology as a Bridge</h3>
+    <p>Technology offers powerful tools to reduce language and literacy barriers. Translation apps, voice-to-text tools, and AI-powered language learning platforms have made it easier than ever for people to communicate across language differences. Governments and organisations can leverage these technologies to make public services, legal information, and healthcare guidance available in multiple languages at low cost.</p>
+
+    <h3>Community-Based Literacy Programmes</h3>
+    <p>Community literacy programmes that meet people where they are — in their own languages, at their own pace, in familiar environments — have proven highly effective. When literacy education is combined with practical life skills such as reading a bus timetable, filling in a job application, or understanding a rental agreement, it becomes immediately relevant and motivating for learners.</p>
+
+    <h3>Policy and Legal Reform</h3>
+    <p>Governments must recognise language rights as human rights. This means legally protecting the right to access public services in one's own language, funding multilingual education systems, and requiring healthcare and legal services to provide interpretation. Countries that have adopted robust language policies demonstrate that it is possible to value linguistic diversity while building a cohesive society.</p>
+
+    <h3>Raising Awareness and Changing Attitudes</h3>
+    <p>Social attitudes toward language diversity matter enormously. When speakers of minority languages are made to feel ashamed of their mother tongue, or when literacy struggles are treated as personal failures rather than systemic issues, the barriers only deepen. Education systems, media, and community leaders all have a role to play in fostering respect for linguistic diversity and creating environments where people feel safe asking for help.</p>
+
+    <h2 id="take-action">⚡ What You Can Do — Starting Today</h2>
+
+    <p>Language and literacy inequality can feel distant or abstract — until you look at the person sitting next to you. As students, citizens, and future professionals, we all have the power to take meaningful action.</p>
+
+    <div class="highlight-box">
+      <p><strong>Actions for Students &amp; Citizens</strong></p>
+      <ul>
+        <li>Volunteer as a literacy tutor or language conversation partner for immigrants and refugees in your community.</li>
+        <li>Advocate for multilingual signage, information, and services in your school, workplace, or local area.</li>
+        <li>Support organisations that provide free literacy education and language classes.</li>
+        <li>Challenge language-based discrimination when you see it — defending someone's right to speak their language is an act of equality.</li>
+        <li>As a future professional, commit to making your communications clear, accessible, and inclusive regardless of your field.</li>
+        <li>Share information about language rights and literacy programmes on social media to raise awareness.</li>
+      </ul>
+    </div>
+
+    <p>Reducing language and literacy inequality does not require extraordinary resources — it requires empathy, awareness, and the willingness to make small but meaningful changes in how we communicate, design services, and treat one another.</p>
+
+    <h2 id="conclusion">Conclusion: Language is a Right, Not a Privilege</h2>
+
+    <p>Language and literacy are not just communication tools — they are the keys to participation in society. When people are excluded because of the language they speak or their inability to read, we lose their ideas, their contributions, and their potential. SDG 10 calls on us to build a world where no one is left behind because of the words they use or the letters they cannot read.</p>
+
+    <p>Progress is possible. From multilingual classrooms to medical interpreters, from community literacy programmes to language-rights legislation — the solutions exist. What is needed is the collective will to implement them.</p>
+
+    <div class="highlight-box">
+      <p>📖 <strong>"A language is not just words. It is a culture, a tradition, a unity of a community — a whole history that creates what a community is. It is all embodied in language." — Noam Chomsky</strong></p>
+    </div>
+
+    <a href="home.html" class="back-link">⬅ Back to Home Page</a>
+  </main>
+
+  <a href="#" class="go-top" aria-label="Go to top">↑</a>
+
+  <!-- FOOTER - Same as Student 1 -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>Explore</h3>
+        <p><a href="home.html">Home</a></p>
+        <p><a href="gallery.html">Gallery</a></p>
+        <p><a href="ais.html">Impact Simulator</a></p>
+        <p><a href="sitemap.html">Sitemap</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>About</h3>
+        <p><a href="team.html">Team</a></p>
+        <p><a href="#">Mission</a></p>
+        <p><a href="#">FAQ</a></p>
+        <p><a href="#">Careers</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <p><a href="#">Reports</a></p>
+        <p><a href="#">Data</a></p>
+        <p><a href="#">Support</a></p>
+        <p><a href="#">Blog</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>Email: align@email.com</p>
+        <p>Tel: 011 7899 897</p>
+        <p>Phone: +94 77 989 9098</p>
+        <p>Colombo 05, Sri Lanka</p>
+        <div class="socials">🌐 📘 📸 ▶️</div>
+        <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+      </div>
+      <div class="footer-col">
+        <h3>Legal & Support</h3>
+        <p><a href="pageEditor_ST3.html">Page Editor</a></p>
+        <p><a href="validation_ST3.html">Validation Page</a></p>
+        <p><a href="#">Accessibility</a></p>
+        <div class="student-details">
+          <p><strong>Student Name:</strong> Senuth Hansira Karunaratne</p>
+          <p><strong>Student ID:</strong> 20250673</p>
+          <p><strong>Course:</strong> Web Development</p>
+          <p><strong>Role:</strong> Feedback Page, Team Page, Content Page</p>
+        </div>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

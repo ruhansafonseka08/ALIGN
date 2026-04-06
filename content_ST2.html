@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Barriers · ALIGN | SDG 10</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-page {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+        .content-page h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+            font-size: 2.5rem;
+            border-left: 5px solid var(--accent-fresh);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .content-page h2 {
+            color: var(--primary);
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.6rem;
+        }
+        .content-page h3 {
+            color: var(--accent-fresh);
+            margin: 1.2rem 0 0.5rem;
+            font-size: 1.3rem;
+        }
+        .content-page p {
+            margin: 1rem 0;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+        .content-page ul, .content-page ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        .content-page li {
+            margin: 0.5rem 0;
+            color: var(--text-muted);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .back-link:hover {
+            background: var(--accent-fresh);
+            transform: translateX(-5px);
+            color: white;
+        }
+        .go-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-fresh);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            z-index: 9999;
+        }
+        .go-top:hover {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .img-float-left {
+            float: left;
+            margin: 0 1.5rem 1rem 0;
+            max-width: 350px;
+            width: 100%;
+        }
+        .img-float-left img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .img-float-left figcaption {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 0.3rem;
+            color: var(--text-muted);
+        }
+        .img-float-right {
+            float: right;
+            margin: 0 0 1rem 1.5rem;
+            max-width: 350px;
+            width: 100%;
+        }
+        .img-float-right img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .img-float-right figcaption {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 0.3rem;
+            color: var(--text-muted);
+        }
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .two-column > div {
+            flex: 1;
+            min-width: 250px;
+        }
+        .internal-nav {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--accent-glow);
+        }
+        .internal-nav h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        .internal-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .internal-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .internal-nav a:hover {
+            color: var(--accent-fresh);
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+            border-left: 4px solid var(--accent-fresh);
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+        }
+        .stat-badge {
+            display: inline-block;
+            background: var(--accent-fresh);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .img-float-left, .img-float-right {
+                float: none;
+                margin: 1rem auto;
+                max-width: 100%;
+            }
+            .content-page { padding: 1.5rem; margin: 1rem; }
+            .go-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            .two-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-page">
+        <div class="internal-nav">
+            <h3>📑 On This Page:</h3>
+            <ul>
+                <li><a href="#overview">What Are Cost Barriers?</a></li>
+                <li><a href="#education">Impact on Education</a></li>
+                <li><a href="#healthcare">Impact on Healthcare</a></li>
+                <li><a href="#statistics">Key Statistics</a></li>
+                <li><a href="#hidden">Hidden Costs</a></li>
+                <li><a href="#solutions">Solutions We Support</a></li>
+                <li><a href="#actions">Take Action Today</a></li>
+            </ul>
+        </div>
+
+        <h1 id="overview">💸 Breaking Down Cost Barriers</h1>
+        
+        <!-- Image 1: Devices - Float Right -->
+        <figure class="img-float-right">
+            <img src="Devices.jpg" alt="Expensive digital devices and smartphones preventing access" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Expensive+Devices'">
+            <figcaption>The high cost of devices creates barriers to access</figcaption>
+        </figure>
+        
+        <p><strong>Cost barriers</strong> refer to the high price of digital devices, internet services, and software that prevent many people from accessing technology. In low-income communities, families often cannot afford smartphones, laptops, tablets, or stable internet connections — creating a digital divide that reinforces existing inequalities.</p>
+        
+        <div class="highlight-box">
+            <p>📢 <strong>Did You Know?</strong> In many developing countries, the cost of 1GB of mobile data can represent more than 5% of a person's monthly income, while in wealthy nations it's often less than 1%.</p>
+        </div>
+        
+        <p>When technology is expensive, only certain groups benefit from digital growth. The digital economy expands rapidly, but those who cannot afford entry are left further behind — widening the gap between rich and poor and directly impacting <strong>SDG 10: Reduced Inequalities</strong>.</p>
+        
+        <div class="clearfix"></div>
+        
+        <h2 id="education">🎓 Impact on Education</h2>
+        
+        <!-- Image 2: No Devices - Float Left -->
+        <figure class="img-float-left">
+            <img src="No-Devices.jpg" alt="Students struggling without devices for online learning" onerror="this.src='https://placehold.co/600x400/81C784/white?text=No+Devices'">
+            <figcaption>Millions of students cannot afford devices for education</figcaption>
+        </figure>
+        
+        <p>The cost of technology creates a significant <strong>education gap</strong> that affects millions of students worldwide. When students cannot afford laptops, tablets, or reliable internet, they fall behind their peers and face limited future opportunities.</p>
+        
+        <ul>
+            <li><strong>Homework Gap:</strong> 1 in 3 students cannot complete online homework due to lack of affordable devices or internet</li>
+            <li><strong>Device Shortage:</strong> Many families cannot afford a single computer, forcing siblings to share one device</li>
+            <li><strong>Digital Skills Deficit:</strong> Students without technology fall behind in essential digital literacy skills needed for future careers</li>
+            <li><strong>Higher Education Barriers:</strong> Students without home devices are 20% less likely to pursue college or university degrees</li>
+            <li><strong>Remote Learning Exclusion:</strong> During COVID-19, over 1.3 billion children were unable to participate in remote learning due to lack of affordable technology</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>⚠️ <strong>The Education Cost Gap:</strong> Families in low-income areas spend up to 10% of their annual income on internet and devices — forcing difficult choices between education and basic necessities.</p>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <h2 id="healthcare">🏥 Impact on Healthcare</h2>
+        
+        <!-- Image 3: Telehealth Barriers - Float Right -->
+        <figure class="img-float-right">
+            <img src="Teleheath-barriers.jpg" alt="Elderly patient unable to access telehealth services due to cost" onerror="this.src='https://placehold.co/600x400/2D5A2D/white?text=Telehealth+Barriers'">
+            <figcaption>Telehealth is out of reach for those who cannot afford technology</figcaption>
+        </figure>
+        
+        <p>Cost barriers have transformed into a <strong>healthcare access crisis</strong>. As healthcare increasingly moves online, those who cannot afford devices or internet are being left behind in accessing essential medical services.</p>
+        
+        <ul>
+            <li><strong>Telehealth Exclusion:</strong> Patients without affordable devices or internet cannot access virtual doctor visits</li>
+            <li><strong>Chronic Care Management:</strong> Remote monitoring for conditions like diabetes and heart disease requires technology many cannot afford</li>
+            <li><strong>Mental Health Access:</strong> Online therapy and mental health support are unavailable to those without affordable connectivity</li>
+            <li><strong>Prescription Management:</strong> Digital pharmacy services and medication reminders require smartphones or computers</li>
+            <li><strong>Health Information Gap:</strong> Inability to access online health resources limits ability to manage personal health</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>⚠️ <strong>The Healthcare Cost Gap:</strong> Studies show that patients without affordable internet are 30% more likely to delay medical care due to inability to access telehealth services.</p>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <h2 id="statistics">📊 Key Statistics That Matter</h2>
+        <ul>
+            <li><span class="stat-badge">Global</span> <strong>2.9 billion people</strong> cannot afford internet access (ITU, 2024)</li>
+            <li><span class="stat-badge">Income</span> Low-income families spend up to <strong>10% of their income</strong> on internet services</li>
+            <li><span class="stat-badge">Devices</span> A basic smartphone costs <strong>over 50%</strong> of monthly income in developing nations</li>
+            <li><span class="stat-badge">Data</span> Mobile data costs <strong>10x higher</strong> in low-income countries than wealthy ones</li>
+            <li><span class="stat-badge">Education</span> <strong>1 in 3 students</strong> cannot afford a computer for online learning</li>
+            <li><span class="stat-badge">Healthcare</span> Patients without broadband are <strong>30% more likely</strong> to delay medical care</li>
+            <li><span class="stat-badge">Rural</span> Rural households pay <strong>30% more</strong> for internet due to infrastructure gaps</li>
+        </ul>
+        
+        <h2 id="hidden">💰 The Hidden Costs of Digital Exclusion</h2>
+        <ul>
+            <li><strong>Device Maintenance:</strong> Repairs and replacement parts are often too expensive for low-income families</li>
+            <li><strong>Software Licensing:</strong> Essential software subscriptions add monthly costs that add up quickly</li>
+            <li><strong>Electricity:</strong> Charging devices requires reliable electricity — not always available or affordable</li>
+            <li><strong>Data Top-ups:</strong> Exceeding data limits incurs additional charges that strain budgets</li>
+            <li><strong>Replacement Costs:</strong> Technology becomes outdated quickly, requiring new purchases every few years</li>
+            <li><strong>Training Costs:</strong> Digital literacy programs may have fees that exclude those who need them most</li>
+        </ul>
+        
+        <h2 id="solutions">💡 Solutions We Support</h2>
+        
+        <div class="two-column">
+            <div>
+                <figure style="margin:0; text-align:center;">
+                    <img src="affordable-solutions.jpg" alt="Affordable technology solutions and community programs" style="width:100%; border-radius:1rem;" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Affordable+Solutions'">
+                    <figcaption style="font-size:0.7rem; margin-top:0.3rem;">Community programs making technology affordable</figcaption>
+                </figure>
+            </div>
+            <div>
+                <ul>
+                    <li><strong>Government Subsidies:</strong> Programs that reduce internet costs for low-income families and students</li>
+                    <li><strong>Affordable Device Programs:</strong> Payment plans, refurbished device initiatives, and device libraries</li>
+                    <li><strong>Open-Source Software:</strong> Free alternatives to expensive licensed software (e.g., LibreOffice, GIMP)</li>
+                    <li><strong>Public Access Points:</strong> Free Wi-Fi in libraries, schools, community centers, and public spaces</li>
+                    <li><strong>Zero-Rating:</strong> Educational and healthcare content accessible without data charges</li>
+                    <li><strong>Community-Owned Networks:</strong> Locally managed, affordable internet infrastructure</li>
+                    <li><strong>Device Donation Programs:</strong> Collecting and redistributing used devices to students and patients in need</li>
+                    <li><strong>Telehealth Support:</strong> Programs to help patients access virtual care with affordable devices</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2 id="actions">🌟 What You Can Do Today</h2>
+        <ol>
+            <li><strong>Donate used devices</strong> — Give old smartphones, laptops, or tablets to schools, libraries, or healthcare centers</li>
+            <li><strong>Support affordable internet initiatives</strong> — Advocate for community broadband and municipal Wi-Fi in your area</li>
+            <li><strong>Volunteer to teach digital skills</strong> — Help students, seniors, and patients learn essential digital skills</li>
+            <li><strong>Promote open-source software</strong> — Share free alternatives to expensive programs with your community</li>
+            <li><strong>Contact local representatives</strong> — Advocate for internet subsidy programs and affordable connectivity policies</li>
+            <li><strong>Support telehealth access</strong> — Help seniors and patients access virtual healthcare services</li>
+            <li><strong>Share information</strong> — Spread awareness about low-cost internet and device programs in your community</li>
+        </ol>
+        
+        <div class="highlight-box">
+            <p>🌱 <strong>Affordable technology is not a luxury — it's a necessity for education and healthcare.</strong> By working together to reduce cost barriers, we can create a more equitable world where opportunity is not determined by income.</p>
+        </div>
+        
+        <p>Reducing cost barriers is essential for achieving <strong>SDG 10: Reduced Inequalities</strong>. When everyone can afford to connect, learn, and access healthcare online, we build a society where economic status no longer determines digital opportunity. Together, we can break down these barriers and create a more inclusive future for all.</p>
+        
+        <a href="home.html" class="back-link">⬅ Back to Home Page</a>
+    </main>
+    
+    <a href="#" class="go-top" aria-label="Go to top">↑</a>
+    
+    <!-- FOOTER - With correct links to Student 2's pages -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                
+                <p><a href="pageEditor_ST2.html">Page Editor</a></p>
+<p><a href="validation_ST2.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> M.S.M. Zaidh</p>
+                    <p><strong>Student ID:</strong> 20241116</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> Splash Screen, Impact Simulator, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

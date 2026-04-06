@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIGN-Gallery | Reducing Inequality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link to shared CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ============================================
+           GALLERY PAGE SPECIFIC STYLES
+           ============================================ */
+        
+        /* Hero section for gallery */
+        .hero-gallery {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+            margin: 0 1rem 2rem;
+            border-radius: 2rem;
+            color: var(--text-dark);
+        }
+        
+        .hero-gallery h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-gallery p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .gallery-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .gallery-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.6rem;
+        }
+        
+        .gallery-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        
+        .thumbnail-card {
+            background: var(--bg-card);
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+        
+        .thumbnail-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-fresh);
+        }
+        
+        .thumbnail-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #C8E6C9;
+        }
+        
+        .thumbnail-info {
+            padding: 1.2rem;
+            text-align: left;
+        }
+        
+        .thumbnail-info h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-light);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .thumbnail-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(26, 58, 26, 0.94);
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: var(--white);
+            margin: 2rem auto;
+            padding: 1.8rem;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 1.8rem;
+            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.4);
+            border-top: 5px solid var(--accent-fresh);
+        }
+        
+        .close-modal {
+            position: sticky;
+            top: 0;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #5f7f9e;
+            cursor: pointer;
+            background: rgba(255,255,255,0.95);
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 0.6rem;
+            z-index: 20;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--accent-fresh);
+            transform: scale(1.08);
+        }
+        
+        .modal-image {
+            width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            border-radius: 1rem;
+            margin: 0.5rem 0 1.2rem 0;
+        }
+        
+        .modal-info {
+            margin-top: 0.2rem;
+            width: 100%;
+        }
+        
+        .modal-info h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.75rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-left: 4px solid var(--accent-fresh);
+            padding-left: 1rem;
+        }
+        
+        .modal-info p {
+            line-height: 1.65;
+            margin: 0.7rem 0;
+            font-size: 1rem;
+        }
+        
+        .customization-panel {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(76, 175, 80, 0.3);
+            flex-wrap: wrap;
+        }
+        
+        .custom-btn {
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.3rem;
+            border-radius: 2.2rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .custom-btn:hover {
+            background: var(--accent-fresh);
+            transform: translateY(-2px);
+        }
+        
+        .back-home-link {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            color: var(--accent-fresh);
+            text-decoration: none;
+            font-weight: 500;
+            width: fit-content;
+        }
+        
+        .back-home-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .thumbnail-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+            .gallery-header h1 { font-size: 1.8rem; }
+            .hero-gallery h1 { font-size: 1.8rem; }
+            .modal-content { width: 95%; margin: 1rem auto; padding: 1.2rem; }
+            .modal-image { max-height: 280px; }
+            .modal-info h2 { font-size: 1.4rem; }
+            .customization-panel { justify-content: center; }
+        }
+        
+        @media (max-width: 480px) {
+            .thumbnail-info h2 { font-size: 1rem; }
+            .custom-btn { padding: 0.45rem 1rem; font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - from shared CSS -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo" onerror="this.src='https://placehold.co/48x48/4CAF50/white?text=A'">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html" class="active-nav">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero-gallery">
+            <h1>📸 Visual Stories of Digital Inequality</h1>
+            <p>Click on any image to explore the full story behind digital divide challenges and solutions</p>
+        </div>
+
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h1>🌍 Digital Inclusion Gallery</h1>
+                <p>Explore inspiring stories of how technology is empowering communities and creating equal opportunities for all.</p>
+            </div>
+            
+            <div class="thumbnail-grid">
+                <div class="thumbnail-card" data-img="digital%20divide.jpg" data-title="🌐 The Digital Divide Gap" data-desc="The stark contrast between connected and unconnected communities. Nearly 3 billion people worldwide still lack internet access, creating barriers to education, healthcare, and economic opportunities.">
+                    <img src="digital%20divide.jpg" alt="Digital divide gap" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Digital+Divide'">
+                    <div class="thumbnail-info"><h2>🌐 The Digital Divide Gap</h2><p>3 billion people lack internet access</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="digital-divide%202.jpg" data-title="🏞️ Rural Connectivity Crisis" data-desc="Rural areas are 2x more likely to have no broadband coverage compared to urban centers. Rural communities struggle to access online education, telemedicine, and digital services.">
+                    <img src="digital-divide%202.jpg" alt="Rural connectivity" onerror="this.src='https://placehold.co/600x400/81C784/white?text=Rural+Connectivity'">
+                    <div class="thumbnail-info"><h2>🏞️ Rural Connectivity Crisis</h2><p>Rural areas face 2x less broadband access</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="education.jpg" data-title="🎓 Education Technology Gap" data-desc="Students without home internet are 20% less likely to pursue higher education. During the pandemic, this gap widened dramatically.">
+                    <img src="education.jpg" alt="Education gap" onerror="this.src='https://placehold.co/600x400/2D5A2D/white?text=Education+Gap'">
+                    <div class="thumbnail-info"><h2>🎓 Education Technology Gap</h2><p>20% fewer students pursue higher education</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="education2.jpg" data-title="📚 Digital Learning Barriers" data-desc="When schools closed during the pandemic, millions of students were left behind without devices and reliable internet for online learning.">
+                    <img src="education2.jpg" alt="Learning barriers" onerror="this.src='https://placehold.co/600x400/A5D6A7/1A3A1A?text=Learning+Barriers'">
+                    <div class="thumbnail-info"><h2>📚 Digital Learning Barriers</h2><p>Millions left behind without devices</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="poverty.jpg" data-title="💰 Poverty & Digital Exclusion" data-desc="Low-income families spend up to 10% of their income on internet services. Poverty creates barriers to digital participation.">
+                    <img src="poverty.jpg" alt="Poverty barriers" onerror="this.src='https://placehold.co/600x400/3D6B3D/white?text=Poverty+Barriers'">
+                    <div class="thumbnail-info"><h2>💰 Poverty & Digital Exclusion</h2><p>10% of income spent on internet</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="pverty2.jpg" data-title="💸 Economic Inequality Online" data-desc="The digital economy grows rapidly, but those who cannot afford entry are left further behind.">
+                    <img src="pverty2.jpg" alt="Economic inequality" onerror="this.src='https://placehold.co/600x400/1A3A1A/white?text=Economic+Inequality'">
+                    <div class="thumbnail-info"><h2>💸 Economic Inequality Online</h2><p>Digital economy leaves poor behind</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="low%20income%201.jpg" data-title="🏠 Low-Income Digital Barriers" data-desc="Families in low-income communities cannot afford smartphones, laptops, or stable internet connections.">
+                    <img src="low%20income%201.jpg" alt="Low income barriers" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Low+Income+Barriers'">
+                    <div class="thumbnail-info"><h2>🏠 Low-Income Digital Barriers</h2><p>Affordability is biggest obstacle</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="low%20income%202.jpg" data-title="🤝 Community Digital Solutions" data-desc="Public Wi-Fi hotspots and community centers help bridge the gap with community-driven solutions for digital inclusion.">
+                    <img src="low%20income%202.jpg" alt="Community solutions" onerror="this.src='https://placehold.co/600x400/81C784/1A3A1A?text=Community+Solutions'">
+                    <div class="thumbnail-info"><h2>🤝 Community Digital Solutions</h2><p>Public hotspots bridge connectivity gaps</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="Rural%20vs%20Urban%201.jpg" data-title="🌆 Rural vs Urban Divide" data-desc="The infrastructure gap between cities and rural areas continues to widen. Stark contrast in connectivity between urban and rural regions.">
+                    <img src="Rural%20vs%20Urban%201.jpg" alt="Rural urban divide" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Rural+vs+Urban'">
+                    <div class="thumbnail-info"><h2>🌆 Rural vs Urban Divide</h2><p>Infrastructure gap widens</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="Rural%20vs%20Urban%202.jpg" data-title="📡 Infrastructure Inequality" data-desc="Urban areas enjoy high-speed internet while rural communities struggle with basic connectivity.">
+                    <img src="Rural%20vs%20Urban%202.jpg" alt="Infrastructure inequality" onerror="this.src='https://placehold.co/600x400/81C784/white?text=Infrastructure+Inequality'">
+                    <div class="thumbnail-info"><h2>📡 Infrastructure Inequality</h2><p>High-speed vs basic connectivity</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="Rural%20vs%20Urban%203.jpg" data-title="🌉 Bridging the Connectivity Gap" data-desc="Initiatives to expand broadband to underserved areas are critical for SDG 10. Hope for bridging the connectivity gap.">
+                    <img src="Rural%20vs%20Urban%203.jpg" alt="Bridging gap" onerror="this.src='https://placehold.co/600x400/2D5A2D/white?text=Bridging+the+Gap'">
+                    <div class="thumbnail-info"><h2>🌉 Bridging the Connectivity Gap</h2><p>Expanding broadband to underserved</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="developed%202.jpg" data-title="🌍 Developed World Access" data-desc="While developed countries enjoy advanced digital infrastructure, the global south faces significant barriers.">
+                    <img src="developed%202.jpg" alt="Developed world" onerror="this.src='https://placehold.co/600x400/3D6B3D/white?text=Developed+World'">
+                    <div class="thumbnail-info"><h2>🌍 Developed World Access</h2><p>Global digital inequality between nations</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="developed%203.jpg" data-title="✨ Digital Privilege" data-desc="Access to high-speed internet, modern devices, and digital skills creates privilege.">
+                    <img src="developed%203.jpg" alt="Digital privilege" onerror="this.src='https://placehold.co/600x400/1A3A1A/white?text=Digital+Privilege'">
+                    <div class="thumbnail-info"><h2>✨ Digital Privilege</h2><p>Access to high-speed internet</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="developed%20tech1.jpeg" data-title="🏙️ Technology in Urban Centers" data-desc="Urban centers often have abundant technology resources. Digital richness in well-connected areas.">
+                    <img src="developed%20tech1.jpeg" alt="Urban technology" onerror="this.src='https://placehold.co/600x400/4CAF50/white?text=Urban+Technology'">
+                    <div class="thumbnail-info"><h2>🏙️ Technology in Urban Centers</h2><p>Abundant resources in cities</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="developed%204.jpg" data-title="📈 Digital Prosperity" data-desc="Digital prosperity enables education, business, and innovation. Opportunities that come with digital access.">
+                    <img src="developed%204.jpg" alt="Digital prosperity" onerror="this.src='https://placehold.co/600x400/81C784/1A3A1A?text=Digital+Prosperity'">
+                    <div class="thumbnail-info"><h2>📈 Digital Prosperity</h2><p>Opportunities enabled by digital access</p></div>
+                </div>
+                <div class="thumbnail-card" data-img="developed%205.jpg" data-title="🚀 The Digital Future" data-desc="What if everyone had equal access? A future where digital inclusion is a reality for all.">
+                    <img src="developed%205.jpg" alt="Digital future" onerror="this.src='https://placehold.co/600x400/2D5A2D/white?text=Digital+Future'">
+                    <div class="thumbnail-info"><h2>🚀 The Digital Future</h2><p>Imagining equal digital access</p></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="imageModal" class="modal">
+            <div class="modal-content" id="modalContent">
+                <span class="close-modal">&times;</span>
+                <img id="modalImage" class="modal-image" src="#" alt="Extended view">
+                <div class="modal-info">
+                    <h2 id="modalTitle">Loading...</h2>
+                    <p id="modalDesc"></p>
+                </div>
+                <div class="customization-panel">
+                    <button class="custom-btn" id="changeColorBtn">🎨 Change Color</button>
+                    <button class="custom-btn" id="changeFontBtn">🔤 Change Font</button>
+                    <button class="custom-btn" id="resetCustomBtn">⟳ Reset</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <a href="home.html" class="back-home-link">⬅ Back to Home Page</a>
+
+    <!-- FOOTER - from shared CSS -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST1.html">Page Editor</a></p>
+                <p><a href="validation_ST1.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> K.W.R.P Fonseka</p>
+                    <p><strong>Student ID:</strong> 20240786</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> Template, Home Page, Gallery, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalContent = document.getElementById('modalContent');
+        
+        let originalBgColor = '', originalTitleColor = '', originalDescColor = '', originalFontFamily = '';
+        
+        function openModal(imgSrc, title, description) {
+            modal.style.display = 'block';
+            modalImg.src = imgSrc;
+            modalTitle.textContent = title;
+            modalDesc.textContent = description;
+            
+            if (!originalBgColor) {
+                originalBgColor = getComputedStyle(modalContent).backgroundColor;
+                originalTitleColor = getComputedStyle(modalTitle).color;
+                originalDescColor = getComputedStyle(modalDesc).color;
+                originalFontFamily = getComputedStyle(modalContent).fontFamily;
+            }
+        }
+        
+        function closeModal() { 
+            modal.style.display = 'none'; 
+        }
+        
+        document.querySelectorAll('.thumbnail-card').forEach(card => {
+            card.addEventListener('click', function() {
+                openModal(
+                    this.getAttribute('data-img'), 
+                    this.getAttribute('data-title'), 
+                    this.getAttribute('data-desc')
+                );
+            });
+        });
+        
+        document.querySelector('.close-modal')?.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        
+        let colorIdx = 0;
+        const colorSchemes = [
+            { bg: '#E8F5E9', textColor: '#1A3A1A' },
+            { bg: '#1A3A1A', textColor: '#FFFFFF' },
+            { bg: '#FFFFFF', textColor: '#1A3A1A' }
+        ];
+        
+        let fontIdx = 0;
+        const fonts = [
+            "'Inter', sans-serif",
+            "'Playfair Display', serif",
+            "'Georgia', serif"
+        ];
+        
+        document.getElementById('changeColorBtn')?.addEventListener('click', () => {
+            colorIdx = (colorIdx + 1) % colorSchemes.length;
+            const scheme = colorSchemes[colorIdx];
+            
+            modalContent.style.backgroundColor = scheme.bg;
+            modalTitle.style.color = scheme.textColor;
+            modalDesc.style.color = scheme.textColor;
+            
+            const closeBtn = document.querySelector('.close-modal');
+            if (scheme.bg === '#1A3A1A') {
+                closeBtn.style.color = '#FFFFFF';
+                closeBtn.style.background = 'rgba(26, 58, 26, 0.8)';
+            } else {
+                closeBtn.style.color = '#5f7f9e';
+                closeBtn.style.background = 'rgba(255,255,255,0.95)';
+            }
+        });
+        
+        document.getElementById('changeFontBtn')?.addEventListener('click', () => {
+            fontIdx = (fontIdx + 1) % fonts.length;
+            modalContent.style.fontFamily = fonts[fontIdx];
+        });
+        
+        document.getElementById('resetCustomBtn')?.addEventListener('click', () => {
+            modalContent.style.backgroundColor = originalBgColor;
+            modalTitle.style.color = originalTitleColor;
+            modalDesc.style.color = originalDescColor;
+            modalContent.style.fontFamily = originalFontFamily;
+            
+            const closeBtn = document.querySelector('.close-modal');
+            closeBtn.style.color = '#5f7f9e';
+            closeBtn.style.background = 'rgba(255,255,255,0.95)';
+        });
+        
+        // Get Involved button alert
+        const getInvolvedBtn = document.querySelector('.outline-btn');
+        if (getInvolvedBtn) {
+            getInvolvedBtn.addEventListener('click', () => {
+                alert('Thank you for your interest! Please visit our Impact Simulator or Gallery to learn how you can contribute.');
+            });
+        }
+    </script>
+</body>
+</html>

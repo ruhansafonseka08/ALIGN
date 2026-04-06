@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor · ALIGN | Olu Wadigasinghe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS VARIABLES - Same as Home Page / Global Identity
+           ============================================ */
+        :root {
+            --primary-dark: #1A3A1A;
+            --primary: #2D5A2D;
+            --primary-light: #3D6B3D;
+            --accent-fresh: #4CAF50;
+            --accent-mint: #81C784;
+            --accent-glow: #A5D6A7;
+            --bg-light: #E8F5E9;
+            --bg-card: #FFFFFF;
+            --text-dark: #1A3A1A;
+            --text-muted: #2E5C2E;
+            --white: #FFFFFF;
+            --shadow-sm: 0 6px 14px rgba(30, 70, 30, 0.08);
+            --shadow-md: 0 12px 28px rgba(30, 70, 30, 0.12);
+            --shadow-lg: 0 20px 35px -8px rgba(40, 80, 40, 0.2);
+            --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* ----- HEADER & NAVIGATION - Same as Home Page ----- */
+        .site-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent-fresh);
+        }
+        
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.9rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent-fresh);
+            background: var(--bg-light);
+        }
+        
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .tagline {
+            font-size: 0.7rem;
+            color: var(--accent-fresh);
+            background: rgba(76, 175, 80, 0.12);
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        
+        .navbar ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .navbar a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 550;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--accent-fresh);
+            border-radius: 4px;
+            transition: width 0.25s ease;
+        }
+        
+        .navbar a:hover::after {
+            width: 100%;
+        }
+        
+        .navbar a:hover {
+            color: var(--accent-fresh);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .outline-btn {
+            background: transparent;
+            border: 2px solid var(--accent-fresh);
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        
+        .outline-btn:hover {
+            background: var(--accent-fresh);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.25);
+        }
+        
+        /* Container styling for page editor */
+        .editor-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        main {
+            flex: 3;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+        }
+        
+        aside {
+            flex: 1;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            padding: 1.8rem;
+            align-self: start;
+            position: sticky;
+            top: 100px;
+        }
+        
+        /* Section styling */
+        section {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+            padding-bottom: 1.8rem;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-left: 6px solid var(--accent-fresh);
+            padding-left: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 1.5rem 0 0.8rem 0;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #2c3e2c;
+        }
+        
+        a {
+            color: var(--accent-fresh);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: var(--accent-fresh);
+            color: white;
+            margin-right: 12px;
+            margin-top: 6px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-validation {
+            background: var(--primary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary-light);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.2);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background: var(--primary-dark);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .yes {
+            color: green;
+            font-weight: bold;
+        }
+        
+        .no {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .ref-list {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .ref-list li {
+            margin-bottom: 0.7rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-mint);
+        }
+        
+        .top {
+            text-align: right;
+            margin-top: 1.5rem;
+        }
+        
+        .top a {
+            background: var(--accent-fresh);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .top a:hover {
+            background: var(--primary-dark);
+            text-decoration: none;
+        }
+        
+        /* aside navigation */
+        aside h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-left: none;
+            padding-left: 0;
+            color: var(--primary-dark);
+        }
+        
+        .top-level-ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .top-level-ul > li {
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .top-level-ul ul {
+            margin-left: 1rem;
+            list-style: circle;
+        }
+        
+        .top-level-ul a {
+            font-weight: normal;
+            font-size: 0.85rem;
+        }
+        
+        /* Student info section */
+        .stud {
+            max-width: 1400px;
+            margin: 1rem auto 0;
+            padding: 0 2rem;
+        }
+        
+        .stud h2 {
+            background: var(--bg-light);
+            border-left: 8px solid var(--accent-fresh);
+            padding: 1.2rem 1.8rem;
+            border-radius: 24px;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        
+        /* Footer styling */
+        .main-footer {
+            background: var(--primary-dark);
+            color: var(--bg-light);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--accent-mint);
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-glow);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: #C8E6C9;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin: 0.6rem 0;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent-mint);
+            transform: translateX(6px);
+        }
+        
+        .student-details {
+            background: rgba(129, 199, 132, 0.12);
+            padding: 0.75rem;
+            border-radius: 16px;
+            margin-top: 0.5rem;
+        }
+        
+        .student-details p {
+            font-size: 0.75rem;
+            margin: 0.25rem 0;
+            color: #C8E6C9;
+        }
+        
+        .donate-footer {
+            background: var(--accent-fresh);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .donate-footer:hover {
+            background: var(--accent-mint);
+            transform: translateY(-2px);
+            color: var(--primary-dark);
+        }
+        
+        .socials {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            letter-spacing: 0.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(129, 199, 132, 0.3);
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .editor-container {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+            aside {
+                position: static;
+            }
+            .header-inner {
+                flex-direction: column;
+            }
+            .navbar ul {
+                justify-content: center;
+                gap: 1rem;
+            }
+            .stud h2 {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - Consistent with ALIGN Home Page -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN - Reducing Inequalities Logo" class="brand-logo" onerror="this.src='https://placehold.co/48x48?text=ALIGN'">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="stud">
+        <h2>Olu Wadigasinghe · Team ALIGN · Role: User Profile Page, Sitemap, Content Page (Unequal Participation)</h2>
+    </section>
+
+    <div class="editor-container">
+        <!-- Main content area -->
+        <main>
+            <!-- USER PROFILE PAGE SECTION -->
+            <section>
+                <h2 id="profile">User Profile Page</h2>
+                <h3>Technical Description</h3>
+                <p>The User Profile page implements an interactive profile setup system with real-time progress tracking. The page uses semantic HTML5 with <code>&lt;div&gt;</code> containers grouped by logical sections (personal details, interests, preferences). A <code>&lt;progress&gt;</code> element dynamically updates its <code>value</code> attribute via JavaScript to reflect profile completion percentage. The profile image upload uses <code>&lt;input type="file"&gt;</code> with a <code>FileReader</code> API to preview images without server interaction. JavaScript functions like <code>makeProfile()</code> and <code>updateProgress()</code> manage field validation and progress calculations. CSS custom properties (variables) maintain consistent theming, and Google Fonts (Playfair Display, Inter) are imported for typography.</p>
+                
+                <h3>JavaScript Implementation</h3>
+                <p>Core interactive features include: a progress bar that recalculates completion whenever any input field changes, listening to <code>input</code> and <code>change</code> events. The profile image preview uses <code>FileReader.onload</code> to display the selected image instantly. Form validation ensures required fields are filled before allowing profile finalization, with error messages displayed inline. A reset button clears all fields and resets the progress bar to zero.</p>
+                
+                <h3>Accessibility</h3>
+                <p>All form fields include associated <code>&lt;label&gt;</code> elements with matching <code>for</code> and <code>id</code> attributes. The profile image has descriptive <code>alt</code> text. ARIA attributes (<code>aria-label</code>, <code>role="progressbar"</code>) provide screen reader context. Colour contrast ratios meet WCAG 2.1 AA standards, with focus indicators visible for keyboard navigation.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST4.html#profileVal" target="_blank">View Validation for User Profile Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="profile.html" target="_blank">Open User Profile Page</a></p>
+            </section>
+
+            <!-- SITEMAP PAGE SECTION -->
+            <section>
+                <h2 id="sitemap">Sitemap Page</h2>
+                <h3>Technical Description</h3>
+                <p>The Sitemap page uses an inline SVG (<code>&lt;svg&gt;</code>) to create a visual site hierarchy. <code>&lt;rect&gt;</code> elements represent page nodes with rounded corners, <code>&lt;line&gt;</code> elements with <code>marker-end</code> arrows show connections between pages, and <code>&lt;text&gt;</code> elements provide labels. Each node is wrapped in an <code>&lt;a&gt;</code> tag to enable navigation directly from the diagram. CSS transitions on the <code>rect</code> elements create subtle hover effects (<code>transform: translateY(-2px)</code> and enhanced <code>fill</code>). The SVG is responsive with <code>viewBox</code> and <code>preserveAspectRatio</code>, ensuring scalability across devices. A box shadow and border radius create a polished card-like presentation.</p>
+                
+                <h3>Accessibility</h3>
+                <p>The SVG includes <code>&lt;title&gt;</code> elements for each node to provide context for screen readers. All interactive nodes are keyboard-navigable via <code>&lt;a&gt;</code> tags. The navigation bar uses <code>aria-label="Main navigation"</code>, and the footer social section has <code>role="region"</code> with descriptive labels. High contrast between node text and background ensures readability.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST4.html#sitemapVal" target="_blank">View Validation for Sitemap Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="sitemap.html" target="_blank">Open Sitemap Page</a></p>
+            </section>
+
+            <!-- CONTENT PAGE (Unequal Participation) -->
+            <section>
+                <h2 id="content">Content Page: Unequal Participation Within Groups</h2>
+                <h3>Technical Description</h3>
+                <p>The Content Page covers systemic barriers to participation as part of SDG 10. Semantic HTML5 elements (<code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>) provide clear document structure. An internal navigation sidebar (<code>&lt;aside&gt;</code>) with anchor links enables users to jump to specific sections. Images use the <code>content-img</code> class with <code>border-radius: 16px</code>, <code>box-shadow</code>, and <code>object-fit: cover</code> for consistent presentation. A custom-styled ordered list uses CSS counters to replace default numbers with green circular badges. A <code>position: fixed</code> "Go to Top" button remains visible during scrolling for easy navigation. The layout uses CSS Grid for the main content area with a sticky sidebar.</p>
+                
+                <h3>Accessibility</h3>
+                <p>All images include descriptive <code>alt</code> attributes explaining visual content. Heading levels follow a logical hierarchy (h1 → h2 → h3). The internal navigation sidebar uses <code>aria-label="Page sections navigation"</code>. Skip links are implemented to bypass repetitive content. High-contrast colours and responsive design ensure readability across devices. Focus states are visible for all interactive elements.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST4.html#contentVal" target="_blank">View Validation for Content Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="content_ST4.html" target="_blank">Open Unequal Participation Content Page</a></p>
+            </section>
+
+            <!-- Challenges and Lessons Learned -->
+            <section>
+                <h2 id="challenge">Challenges and Lessons Learned</h2>
+                <p><strong>Challenge 1 — Profile Page JavaScript Complexity:</strong> Implementing the dynamic progress bar that accurately tracked completion across multiple sections (personal details, interests, preferences) required careful state management. I solved this by creating a central <code>updateProgress()</code> function that evaluates each field group and calculates completion percentage, then updates the <code>&lt;progress&gt;</code> element and displays a completion message. This taught me the importance of modular JavaScript functions.</p>
+                <p><strong>Challenge 2 — HTML Validation Errors:</strong> The W3C validator flagged several structural issues: using <code>&lt;button&gt;</code> with <code>href</code> attributes, incorrect heading hierarchy (jumping from h3 to h5 without h4), duplicate image IDs, and <code>&lt;ul&gt;</code> directly inside another <code>&lt;ul&gt;</code> without wrapping <code>&lt;li&gt;</code> tags. I resolved these by replacing buttons with styled anchor tags, fixing heading order, assigning unique IDs, and properly nesting list elements. This reinforced the importance of semantic HTML and validation discipline.</p>
+                <p><strong>Challenge 3 — SVG Sitemap Responsiveness:</strong> Ensuring the sitemap SVG scaled correctly on mobile devices while maintaining readability was difficult. I used <code>viewBox="0 0 800 400"</code> with <code>preserveAspectRatio="xMidYMid meet"</code> and wrapped the SVG in a responsive container with <code>max-width: 100%</code> and <code>height: auto</code>. Media queries adjust font sizes for smaller screens.</p>
+                <p><strong>Lessons Learned:</strong> These challenges taught me to validate code early and often, plan DOM structure before implementation, and write reusable JavaScript functions. I also gained a deeper appreciation for accessibility standards and the importance of maintaining logical heading hierarchies.</p>
+            </section>
+
+            <!-- Compliance with JANET regulations -->
+            <section>
+                <h2 id="compliance">Compliance with JANET Regulations</h2>
+                <p><strong>Appropriate and Ethical Content:</strong> All pages (User Profile, Sitemap, Content) contain educational content directly supporting SDG 10 — Reducing Inequalities. No harmful, discriminatory, or illegal material is present, fully complying with Janet's Acceptable Use Policy (AUP).</p>
+                <p><strong>Data Protection and GDPR:</strong> The User Profile page collects personal data (name, email, interests) for demonstration purposes only. No data is transmitted to or stored on any server, ensuring compliance with GDPR and the UK Data Protection Act 2018. Users are informed that data remains locally within the browser.</p>
+                <p><strong>Copyright and Third-Party Resources:</strong> All images are sourced from royalty-free platforms (Unsplash, Pexels) with appropriate licensing. Google Fonts are loaded via official CDN. All external resources are properly referenced in the References section.</p>
+                <p><strong>Accessibility Compliance:</strong> All pages meet WCAG 2.1 AA standards through semantic HTML, descriptive alt text, keyboard navigation, visible focus states, and high-contrast colour schemes, satisfying the Equality Act 2010 and Public Sector Bodies Accessibility Regulations 2018.</p>
+                <p><strong>Network Security:</strong> No malicious code, tracking scripts, or unauthorised data collection is implemented. The website does not attempt to exploit network resources, complying with the Computer Misuse Act 1990 and Janet security policies. <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank">See the lecture notes for more details on compliance.</a></p>
+            </section>
+
+            <!-- Group Meetings and Individual Contribution Log -->
+            <section>
+                <h2 id="group">Group Meetings and Individual Contribution Log</h2>
+                <p>The table below documents my individual engagement with group work, focusing on personal contributions across a minimum of seven meetings as required.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="6">Group Meetings and Contribution Log – Student 4 (Olu Wadigasinghe)</th>
+                        </tr>
+                        <tr>
+                            <th>Meeting</th>
+                            <th>Date &amp; Time</th>
+                            <th>Format</th>
+                            <th>Objective</th>
+                            <th>Attended</th>
+                            <th>My Individual Contribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>15 Feb 2026 · 14:00</td><td>Face-to-face</td><td>Agree SDG and assign roles</td><td class="yes">Yes</td><td>I agreed to take responsibility for User Profile Page, Sitemap, and Content Page. I suggested focusing on visual navigation aids like the SVG sitemap.</td></tr>
+                        <tr><td>2</td><td>27 Feb 2026 · 16:30</td><td>Online (Zoom)</td><td>Review template design and structure</td><td class="yes">Yes</td><td>I provided feedback on the template layout and suggested using CSS Grid for the content page structure. I shared initial SVG sitemap concepts.</td></tr>
+                        <tr><td>3</td><td>04 Mar 2026 · 13:00</td><td>Face-to-face</td><td>Review Home Page and Gallery designs</td><td class="yes">Yes</td><td>I demonstrated the interactive profile page progress bar and received feedback on improving validation logic.</td></tr>
+                        <tr><td>4</td><td>10 Mar 2026 · 12:30</td><td>Face-to-face</td><td>Check JavaScript, CSS and links</td><td class="yes">Yes</td><td>I helped debug cross-page navigation issues and assisted with CSS flexbox alignment problems on the sitemap page.</td></tr>
+                        <tr><td>5</td><td>17 Mar 2026 · 17:00</td><td>Online (Discord)</td><td>Testing and validation</td><td class="yes">Yes</td><td>I ran all my pages through the W3C validator and fixed structural errors: heading hierarchy, duplicate IDs, and improper list nesting. I documented the issues for the team.</td></tr>
+                        <tr><td>6</td><td>24 Mar 2026 · 14:15</td><td>Face-to-face</td><td>Content review and navigation check</td><td class="yes">Yes</td><td>I reviewed the tone and consistency of SDG messaging across all content pages. I added missing ARIA labels to the sitemap SVG.</td></tr>
+                        <tr><td>7</td><td>28 Mar 2026 · 10:00</td><td>Face-to-face</td><td>Final review and submission preparation</td><td class="yes">Yes</td><td>I conducted final accessibility checks, ensured all validation links work correctly, and helped prepare the submission zip file.</td></tr>
+                    </tbody>
+                </table>
+                <p>Throughout the project, I maintained regular communication via WhatsApp group and ensured timely integration of components with the shared CSS variables and template structure.</p>
+            </section>
+
+            <!-- References -->
+            <section>
+                <h2 id="ref">References</h2>
+                <ul class="ref-list">
+                    <li>University of Westminster (2026) <em>4COSC011W Web Design and Development — Module Lecture Notes.</em> Blackboard Ultra. (Last accessed: March 2026).</li>
+                    <li>World Wide Web Consortium (W3C) (2018) <em>Web Content Accessibility Guidelines (WCAG) 2.1.</em> Available at: <a href="https://www.w3.org/TR/WCAG21/" target="_blank">https://www.w3.org/TR/WCAG21/</a> (Last accessed: March 2026).</li>
+                    <li>MDN Web Docs (2026) <em>HTML, CSS, JavaScript Reference Documentation.</em> Available at: <a href="https://developer.mozilla.org" target="_blank">https://developer.mozilla.org</a> (Last accessed: March 2026).</li>
+                    <li>W3Schools (2026) <em>HTML, CSS, JavaScript Tutorials.</em> Available at: <a href="https://www.w3schools.com" target="_blank">https://www.w3schools.com</a> (Last accessed: March 2026).</li>
+                    <li>Unsplash (2026) <em>Free High-Resolution Royalty-Free Photos.</em> Available at: <a href="https://unsplash.com" target="_blank">https://unsplash.com</a> (Last accessed: March 2026).</li>
+                    <li>Google Fonts (2026) <em>Playfair Display & Inter Typefaces.</em> Available at: <a href="https://fonts.google.com" target="_blank">https://fonts.google.com</a> (Last accessed: March 2026).</li>
+                    <li>United Nations (2026) <em>Sustainable Development Goal 10 — Reduced Inequalities.</em> Available at: <a href="https://sdgs.un.org/goals/goal10" target="_blank">https://sdgs.un.org/goals/goal10</a> (Last accessed: March 2026).</li>
+                    <li>Duckett, J. (2011) <em>HTML and CSS: Design and Build Websites.</em> Indianapolis: John Wiley & Sons.</li>
+                </ul>
+            </section>
+
+            <p class="top"><a href="#top">Go top</a></p>
+        </main>
+
+        <!-- Sidebar area - customised for Student 4 -->
+        <aside>
+            <h3>Core pages developed:</h3>
+            <ul class="top-level-ul">
+                <li>Student 4 (Olu Wadigasinghe)</li>
+                <ul>
+                    <li><a href="#profile">User Profile Page</a></li>
+                    <li><a href="#sitemap">Sitemap Page</a></li>
+                    <li><a href="#content">Content Page (Unequal Participation)</a></li>
+                </ul>
+                
+                
+                <li><a href="#challenge">Challenges and Lessons Learned</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#group">Group Meetings and Individual Contribution Log</a></li>
+                <li><a href="#ref">References</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- FOOTER - Identical to Home Page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST4.html">Page Editor</a></p>
+                <p><a href="validation_ST4.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> Olu Wadigasinghe</p>
+                    <p><strong>Student ID:</strong> 20250697</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> User Profile, Sitemap, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

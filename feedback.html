@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback & Programs · ALIGN | SDG 10</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ============================================
+       FEEDBACK PAGE SPECIFIC STYLES
+       ============================================ */
+    
+    /* Page Hero - Same as Gallery Page */
+    .page-hero {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+        margin: 0 1rem 2rem;
+        border-radius: 2rem;
+        color: var(--text-dark);
+    }
+
+    .page-hero .badge {
+        display: inline-block;
+        background: var(--accent-fresh);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.9rem;
+        border-radius: 30px;
+        margin-bottom: 1rem;
+    }
+
+    .page-hero h1 {
+        
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-dark);
+    }
+
+    .page-hero h1 em {
+        color: var(--accent-fresh);
+        font-style: italic;
+    }
+
+    .page-hero p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
+        color: var(--text-muted);
+    }
+
+    /* Main wrapper */
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Section title */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    
+    .title-line {
+      width: 60px;
+      height: 3px;
+      background: var(--accent-fresh);
+      margin: 1rem auto 2rem;
+      border-radius: 2px;
+    }
+
+    /* Programmes Section */
+    .programmes-section { margin-bottom: 4rem; }
+
+    .programmes-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .sort-dropdown {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent-glow);
+      border-radius: 4px;
+      background: var(--bg-card);
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    
+    .sort-dropdown:focus { outline: none; border-color: var(--accent-fresh); }
+
+    /* Scrollable container */
+    .programmes-scroll {
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      scrollbar-width: thin;
+    }
+    
+    .programmes-scroll::-webkit-scrollbar { width: 5px; }
+    .programmes-scroll::-webkit-scrollbar-track { background: var(--accent-glow); border-radius: 3px; }
+    .programmes-scroll::-webkit-scrollbar-thumb { background: var(--accent-fresh); border-radius: 3px; }
+
+    /* Programme cards grid */
+    .programmes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .programme-card {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-glow);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .programme-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent-fresh);
+    }
+
+    .programme-card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .programme-card-body { padding: 1rem; }
+    
+    .programme-card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+    }
+    
+    .programme-card-body p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .btn-card {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .btn-card:hover { 
+      background: var(--accent-fresh);
+      transform: translateY(-2px);
+    }
+
+    /* Ratings Section */
+    .ratings-section { margin-bottom: 4rem; }
+
+    .rating-summary {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--primary);
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .rating-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent-fresh);
+      line-height: 1;
+    }
+    
+    .rating-label { 
+      font-size: 1rem; 
+      font-weight: 600; 
+      color: white;
+    }
+    
+    .rating-count { 
+      font-size: 0.75rem; 
+      opacity: 0.7;
+      color: white;
+      margin-top: 0.2rem;
+    }
+    
+    .rating-stars { 
+      font-size: 1.2rem; 
+      color: var(--accent-fresh);
+      letter-spacing: 0.1em;
+    }
+
+    /* Review cards */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-glow);
+      border-radius: 1rem;
+      padding: 1.2rem;
+      transition: var(--transition);
+    }
+    
+    .review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .review-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+    }
+    
+    .review-card p { 
+      font-size: 0.85rem; 
+      color: var(--text-muted); 
+      line-height: 1.5; 
+      margin-bottom: 0.6rem;
+    }
+    
+    .review-card .see-more { 
+      font-size: 0.75rem; 
+      color: var(--accent-fresh); 
+      text-decoration: none; 
+      font-weight: 600;
+    }
+    
+    .review-card .see-more:hover { 
+      text-decoration: underline; 
+      color: var(--primary);
+    }
+    
+    .review-meta { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-top: 0.75rem; 
+      font-size: 0.7rem; 
+      color: var(--text-muted);
+    }
+    
+    .review-score { 
+      background: var(--accent-fresh); 
+      color: white; 
+      font-weight: 700; 
+      font-size: 0.7rem; 
+      padding: 0.2rem 0.5rem; 
+      border-radius: 20px;
+    }
+
+    /* Feedback Form Section */
+    .feedback-section { 
+      background: var(--bg-card); 
+      border: 1px solid var(--accent-glow); 
+      border-radius: 1rem; 
+      padding: 2rem; 
+      margin-top: 2rem;
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--primary-dark);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="datetime-local"],
+    textarea,
+    select {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--accent-glow);
+      border-radius: 0.5rem;
+      background: white;
+      color: var(--text-dark);
+      transition: border-color 0.2s;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-fresh);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+    }
+
+    input.error, textarea.error, select.error {
+      border-color: #e74c3c;
+      background: #fff5f5;
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.7rem;
+      color: #e74c3c;
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+    
+    .error-msg.show { display: block; }
+
+    .char-counter {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 0.3rem;
+    }
+    
+    .char-counter.warning { color: var(--accent-fresh); }
+    .char-counter.limit   { color: #e74c3c; font-weight: 600; }
+
+    fieldset {
+      border: 1px solid var(--accent-glow);
+      border-radius: 0.8rem;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    legend {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-fresh);
+      padding: 0 0.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .btn-submit {
+      background: var(--accent-fresh);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .btn-submit:hover { 
+      background: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .confirmation-msg {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid var(--accent-fresh);
+      border-radius: 0.8rem;
+      padding: 1rem;
+      color: var(--primary);
+      font-weight: 500;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    
+    .confirmation-msg.show { display: block; }
+
+    /* Go to top button */
+    .go-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--accent-fresh);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      z-index: 9999;
+    }
+    
+    .go-top:hover {
+      background: var(--primary);
+      transform: scale(1.1);
+    }
+
+    /* Back to Home link */
+    .back-home-container {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    #Back_home {
+      display: inline-block;
+      color: var(--accent-fresh);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    #Back_home:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .programmes-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      .page-hero h1 { font-size: 1.8rem; }
+      .rating-summary { flex-direction: column; text-align: center; gap: 1rem; }
+      .programmes-grid { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: repeat(2, 1fr); }
+      .main-wrapper { padding: 1rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .footer-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER - Same as Home Page -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo">
+        <span class="brand-name">ALIGN</span>
+        <span class="tagline">SDG 10 · Reduce Inequalities</span>
+      </div>
+      <nav class="navbar" aria-label="Main navigation">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html">Impact Simulator</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="feedback.html" class="active-nav">Feedback</a></li>
+          <li><a href="profile.html">User Profile</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner - Same as Gallery Page -->
+  <div class="page-hero" id="top">
+    <div class="badge">SDG 10 — Share Your Voice</div>
+    <h1>Get Involved &amp; <em>Share Your Feedback</em></h1>
+    <p>Explore initiatives tackling inequality and submit your feedback to help us grow.</p>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+
+    <!-- SECTION 1: SCROLLABLE PROGRAMME DIRECTORY -->
+    <section class="programmes-section">
+      <h2 class="section-title">Programmes &amp; Opportunities</h2>
+      <p class="section-subtitle">Explore initiatives related to SDG 10 — Reducing Inequalities</p>
+      <div class="title-line"></div>
+
+      <div class="programmes-controls">
+        <p style="font-size:0.85rem; color:var(--text-muted);">Showing 4 opportunities</p>
+        <select class="sort-dropdown" aria-label="Sort programmes">
+          <option>Most Popular</option>
+          <option>Student-Friendly</option>
+          <option>Newest First</option>
+        </select>
+      </div>
+
+      <div class="programmes-scroll">
+        <div class="programmes-grid">
+          <!-- Card 1 -->
+          <article class="programme-card">
+            <img class="programme-card-img" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=70" alt="Digital literacy workshop">
+            <div class="programme-card-body">
+              <h3>Digital Literacy Workshops</h3>
+              <p>Free workshops teaching essential digital skills to underserved communities.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest!')">Get Involved</button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="programme-card">
+            <img class="programme-card-img" src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&q=70" alt="Community book drive">
+            <div class="programme-card-body">
+              <h3>Community Book Drive</h3>
+              <p>Donate textbooks for students in under-resourced schools.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest!')">Learn More</button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="programme-card">
+            <img class="programme-card-img" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=70" alt="Telemedicine access">
+            <div class="programme-card-body">
+              <h3>Telemedicine Access Campaign</h3>
+              <p>Support free telemedicine access for rural communities.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest!')">Join Campaign</button>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="programme-card">
+            <img class="programme-card-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=70" alt="Affordable housing">
+            <div class="programme-card-body">
+              <h3>Affordable Housing Initiative</h3>
+              <p>Volunteer to build safe, affordable homes for families.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest!')">Volunteer</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: RATINGS & REVIEWS -->
+    <section class="ratings-section">
+      <h2 class="section-title">What People Are Saying</h2>
+      <p class="section-subtitle">Ratings and reviews from our community members</p>
+      <div class="title-line"></div>
+
+      <div class="rating-summary">
+        <div>
+          <div class="rating-big">8.7<span style="font-size:1.2rem;">/10</span></div>
+          <div class="rating-label">Excellent</div>
+          <div class="rating-count">Based on 214 community reviews</div>
+        </div>
+        <div>
+          <div class="rating-stars">★★★★★</div>
+          <p style="font-size:0.8rem; opacity:0.8; margin-top:0.5rem;">94% would recommend our programmes</p>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <!-- Review 1 -->
+        <div class="review-card">
+          <h2>Life-Changing Digital Skills Programme</h2>
+          <p>The digital literacy workshop changed my perspective. I was able to apply for jobs online...</p>
+          <a href="#" class="see-more">See more</a>
+          <div class="review-meta">
+            <span>Amara S. — March 2026</span>
+            <span class="review-score">9/10</span>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <h2>Book Drive Made a Difference</h2>
+          <p>Our school received over 200 textbooks. Students who couldn't afford materials now have everything...</p>
+          <a href="#" class="see-more">See more</a>
+          <div class="review-meta">
+            <span>Mr. J. Perera — Feb 2026</span>
+            <span class="review-score">10/10</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <h2>Telemedicine Reached My Village</h2>
+          <p>Through the telemedicine programme, I consulted a specialist without travelling hours away...</p>
+          <a href="#" class="see-more">See more</a>
+          <div class="review-meta">
+            <span>Fatima K. — Jan 2026</span>
+            <span class="review-score">8/10</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: FEEDBACK FORM -->
+    <section class="feedback-section">
+      <h2 class="section-title">Share Your Feedback</h2>
+      <p class="section-subtitle">We'd love to hear your thoughts — help us improve our programmes.</p>
+      <div class="title-line"></div>
+
+      <form id="feedbackForm" novalidate>
+        <fieldset>
+          <legend>Personal Details</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" placeholder="e.g. Jane Smith" />
+              <span class="error-msg" id="err-fullName">Please enter your full name.</span>
+            </div>
+            <div class="form-group">
+              <label for="emailAddr">Email Address *</label>
+              <input type="email" id="emailAddr" placeholder="e.g. jane@email.com" />
+              <span class="error-msg" id="err-email">Please enter a valid email address.</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telNum">Telephone Number</label>
+              <input type="tel" id="telNum" placeholder="e.g. +94 77 123 4567" />
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input type="text" id="country" list="countryList" placeholder="Start typing..." />
+              <datalist id="countryList">
+                <option value="Sri Lanka"></option>
+                <option value="United Kingdom"></option>
+                <option value="United States"></option>
+                <option value="India"></option>
+                <option value="Australia"></option>
+              </datalist>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" rows="2" placeholder="Your address (optional)"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Feedback Details</legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="programme">Programme *</label>
+              <select id="programme">
+                <option value="">— Select a programme —</option>
+                <option value="digital">Digital Literacy Workshops</option>
+                <option value="books">Community Book Drive</option>
+                <option value="tele">Telemedicine Access Campaign</option>
+                <option value="housing">Affordable Housing Initiative</option>
+              </select>
+              <span class="error-msg" id="err-programme">Please select a programme.</span>
+            </div>
+            <div class="form-group">
+              <label for="rating">Your Rating *</label>
+              <select id="rating">
+                <option value="">— Select a rating —</option>
+                <option value="10">10 — Outstanding</option>
+                <option value="9">9 — Excellent</option>
+                <option value="8">8 — Very Good</option>
+                <option value="7">7 — Good</option>
+                <option value="6">6 — Fair</option>
+                <option value="5">5 — Average</option>
+              </select>
+              <span class="error-msg" id="err-rating">Please select a rating.</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visitDate">Participation Date</label>
+              <input type="date" id="visitDate" />
+            </div>
+            <div class="form-group">
+              <label for="visitTime">Date &amp; Time</label>
+              <input type="datetime-local" id="visitTime" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Feedback / Comments *</label>
+            <textarea id="message" rows="5" maxlength="500" placeholder="Tell us about your experience..."></textarea>
+            <div class="char-counter" id="charCounter">500 characters remaining</div>
+            <span class="error-msg" id="err-message">Please enter your feedback (minimum 20 characters).</span>
+          </div>
+        </fieldset>
+
+        <button type="button" class="btn-submit" id="submitBtn" onclick="submitForm()">Submit Feedback</button>
+      </form>
+
+      <div class="confirmation-msg" id="confirmMsg">
+        ✅ Thank you for your feedback! Your response has been recorded.
+      </div>
+    </section>
+
+    <!-- Back to Home Link -->
+    <div class="back-home-container">
+      <a href="home.html" id="Back_home">⬅ Back to Home Page</a>
+    </div>
+  </main>
+
+  <!-- Go to Top -->
+  <a href="#top" class="go-top" aria-label="Go to top">↑</a>
+
+  <!-- FOOTER - Same as Home Page -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>Explore</h3>
+        <p><a href="home.html">Home</a></p>
+        <p><a href="gallery.html">Gallery</a></p>
+        <p><a href="ais.html">Impact Simulator</a></p>
+        <p><a href="sitemap.html">Sitemap</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>About</h3>
+        <p><a href="team.html">Team</a></p>
+        <p><a href="#">Mission</a></p>
+        <p><a href="#">FAQ</a></p>
+        <p><a href="#">Careers</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <p><a href="#">Reports</a></p>
+        <p><a href="#">Data</a></p>
+        <p><a href="#">Support</a></p>
+        <p><a href="#">Blog</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>Email: align@email.com</p>
+        <p>Tel: 011 7899 897</p>
+        <p>Phone: +94 77 989 9098</p>
+        <p>Colombo 05, Sri Lanka</p>
+        <div class="socials">🌐 📘 📸 ▶️</div>
+        <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+      </div>
+      <div class="footer-col">
+        <h3>Legal & Support</h3>
+        <p><a href="pageEditor_ST3.html">Page Editor</a></p>
+        <p><a href="validation_ST3.html">Validation Page</a></p>
+        <p><a href="#">Accessibility</a></p>
+        <div class="student-details">
+          <p><strong>Student Name:</strong> Senuth Hansira Karunaratne</p>
+          <p><strong>Student ID:</strong> 20250673</p>
+          <p><strong>Course:</strong> Web Development</p>
+          <p><strong>Role:</strong> Feedback Page, Team Page, Content Page</p>
+        </div>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Live character counter
+    const messageField = document.getElementById('message');
+    const charCounter = document.getElementById('charCounter');
+    const maxChars = 500;
+
+    messageField.addEventListener('input', function () {
+      const remaining = maxChars - this.value.length;
+      charCounter.textContent = remaining + ' characters remaining';
+      charCounter.classList.remove('warning', 'limit');
+      if (remaining <= 50 && remaining > 10) charCounter.classList.add('warning');
+      else if (remaining <= 10) charCounter.classList.add('limit');
+    });
+
+    function setError(fieldId, errorId, show) {
+      const field = document.getElementById(fieldId);
+      const err = document.getElementById(errorId);
+      if (show) {
+        field.classList.add('error');
+        err.classList.add('show');
+      } else {
+        field.classList.remove('error');
+        err.classList.remove('show');
+      }
+    }
+
+    function submitForm() {
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('emailAddr').value.trim();
+      const programme = document.getElementById('programme').value;
+      const rating = document.getElementById('rating').value;
+      const message = document.getElementById('message').value.trim();
+      let valid = true;
+
+      if (fullName === '') { setError('fullName', 'err-fullName', true); valid = false; }
+      else setError('fullName', 'err-fullName', false);
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) { setError('emailAddr', 'err-email', true); valid = false; }
+      else setError('emailAddr', 'err-email', false);
+
+      if (programme === '') { setError('programme', 'err-programme', true); valid = false; }
+      else setError('programme', 'err-programme', false);
+
+      if (rating === '') { setError('rating', 'err-rating', true); valid = false; }
+      else setError('rating', 'err-rating', false);
+
+      if (message.length < 20) { setError('message', 'err-message', true); valid = false; }
+      else setError('message', 'err-message', false);
+
+      if (valid) {
+        document.getElementById('confirmMsg').classList.add('show');
+        document.getElementById('feedbackForm').reset();
+        charCounter.textContent = '500 characters remaining';
+        charCounter.classList.remove('warning', 'limit');
+        document.getElementById('confirmMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    document.getElementById('fullName').addEventListener('input', function () {
+      if (this.value.trim() !== '') setError('fullName', 'err-fullName', false);
+    });
+    document.getElementById('emailAddr').addEventListener('input', function () {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(this.value.trim())) setError('emailAddr', 'err-email', false);
+    });
+    document.getElementById('programme').addEventListener('change', function () {
+      if (this.value !== '') setError('programme', 'err-programme', false);
+    });
+    document.getElementById('rating').addEventListener('change', function () {
+      if (this.value !== '') setError('rating', 'err-rating', false);
+    });
+    document.getElementById('message').addEventListener('input', function () {
+      if (this.value.trim().length >= 20) setError('message', 'err-message', false);
+    });
+  </script>
+</body>
+</html>
