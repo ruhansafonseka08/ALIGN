@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Align | Digital Collaboration for Everyone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .splash-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('background.jpeg') center/cover no-repeat;
+            z-index: 1;
+        }
+
+        .splash-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 2;
+        }
+
+        .splash-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: white;
+            max-width: 700px;
+            padding: 40px;
+            animation: fadeIn 1s ease-out;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
+        }
+
+        .splash-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 800;
+            color: #4CAF50;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .splash-mission {
+            font-size: 18px;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            margin: 25px 0;
+            animation: fadeIn 1s ease-out 0.4s backwards;
+        }
+
+        .countdown-container {
+            margin: 30px 0;
+            animation: fadeIn 1s ease-out 0.5s backwards;
+        }
+
+        .countdown-text {
+            font-size: 24px;
+            font-weight: 500;
+            color: #81C784;
+            letter-spacing: 1px;
+        }
+
+        #countdown {
+            font-weight: 700;
+            font-size: 28px;
+            display: inline-block;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); color: #4CAF50; }
+            50% { transform: scale(1.1); color: #A5D6A7; }
+        }
+
+        .group-members {
+            margin: 35px 0;
+            padding: 20px;
+            border-top: 2px solid rgba(76, 175, 80, 0.5);
+            border-bottom: 2px solid rgba(76, 175, 80, 0.5);
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+
+        .group-members h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #A5D6A7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .group-members ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .group-members li {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 8px 8px 8px 12px;
+            border-left: 3px solid #4CAF50;
+            border-bottom: 3px solid #4CAF50;
+            border-radius: 20px;
+            text-align: left;
+            transition: color 0.25s, padding-left 0.25s;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .group-members li:hover {
+            color: #A5D6A7;
+            padding-left: 16px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .skip-btn {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background: #4CAF50;
+            border: 2px solid #3D6B3D;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.35);
+            transition: background 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+            animation: fadeIn 1s ease-out 0.7s backwards;
+        }
+
+        .skip-btn:hover {
+            background: #81C784;
+            color: #1A3A1A;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .skip-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .splash-screen.fade-out {
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .splash-title { font-size: 48px; }
+            .splash-content { padding: 20px; margin: 20px; }
+            .splash-mission { font-size: 16px; }
+            .countdown-text { font-size: 20px; }
+            .group-members ul { grid-template-columns: 1fr; }
+            .skip-btn { padding: 10px 30px; font-size: 14px; }
+        }
+
+        @media (max-width: 480px) {
+            .splash-title { font-size: 36px; margin-bottom: 15px; }
+            .splash-content { padding: 15px; margin: 15px; }
+            .splash-mission { font-size: 14px; }
+            .group-members h3 { font-size: 16px; }
+            .group-members li { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-background"></div>
+        <div class="splash-overlay"></div>
+        <div class="splash-content">
+            <h1 class="splash-title">ALIGN</h1>
+            <p class="splash-mission">
+                Our mission is to make digital collaboration accessible, inclusive, and equitable for everyone — regardless of location, income, language, or background.
+            </p>
+            <div class="countdown-container">
+                <p class="countdown-text">Entering site in <span id="countdown">4</span>...</p>
+            </div>
+            <div class="group-members">
+                <h3>Group Members</h3>
+                <ul>
+                    <li>K.W.Ruhansa Fonseka (20240786)</li>
+                    <li>M.S.M. Zaidh (20241116)</li>
+                    <li>Senuth Hansira Karunaratne (20250673)</li>
+                    <li>Olu Wadigasinghe (20250697)</li>
+                </ul>
+            </div>
+            <button class="skip-btn" id="skipBtn">Skip Intro</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const INITIAL_COUNT = 4;
+            const REDIRECT_URL = 'home.html';
+            
+            const splashElement = document.getElementById('splashScreen');
+            const countdownSpan = document.getElementById('countdown');
+            const skipButton = document.getElementById('skipBtn');
+            
+            let remainingSeconds = INITIAL_COUNT;
+            let countdownInterval = null;
+            let isRedirecting = false;
+            
+            // Check if we came here from the back button
+            let shouldAutoRedirect = true;
+            
+            // Detect if page is being restored from back/forward cache (user clicked back arrow)
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                    // User came back via browser back arrow - STOP auto-redirect
+                    shouldAutoRedirect = false;
+                    
+                    // Clear any running countdown
+                    if (countdownInterval) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                    }
+                    
+                    // Reset countdown display to initial value
+                    remainingSeconds = INITIAL_COUNT;
+                    if (countdownSpan) {
+                        countdownSpan.textContent = remainingSeconds;
+                    }
+                }
+            });
+            
+            function clearAllTimers() {
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+            }
+            
+            function performRedirect() {
+                if (isRedirecting) return;
+                isRedirecting = true;
+                clearAllTimers();
+                
+                if (splashElement) {
+                    splashElement.classList.add('fade-out');
+                }
+                
+                setTimeout(function() {
+                    window.location.href = REDIRECT_URL;
+                }, 500);
+            }
+            
+            function updateCountdownDisplay() {
+                if (countdownSpan) {
+                    countdownSpan.textContent = remainingSeconds;
+                }
+            }
+            
+            function tickCountdown() {
+                if (!shouldAutoRedirect) return;
+                
+                if (remainingSeconds <= 1) {
+                    if (countdownInterval) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                    }
+                    performRedirect();
+                } else {
+                    remainingSeconds--;
+                    updateCountdownDisplay();
+                }
+            }
+            
+            function startCountdown() {
+                if (!shouldAutoRedirect) return;
+                
+                remainingSeconds = INITIAL_COUNT;
+                updateCountdownDisplay();
+                
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                }
+                
+                countdownInterval = setInterval(tickCountdown, 1000);
+            }
+            
+            function handleSkipIntro() {
+                if (isRedirecting) return;
+                
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+                performRedirect();
+            }
+            
+            if (skipButton) {
+                skipButton.addEventListener('click', handleSkipIntro);
+            }
+            
+            window.addEventListener('load', function() {
+                startCountdown();
+            });
+            
+            // Fallback safety
+            setTimeout(function() {
+                if (!isRedirecting && shouldAutoRedirect) {
+                    performRedirect();
+                }
+            }, (INITIAL_COUNT * 1000) + 1500);
+        })();
+    </script>
+</body>
+</html>

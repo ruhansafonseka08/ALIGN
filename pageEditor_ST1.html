@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor · ALIGN | K.W.R.P Fonseka</title>
+    <!-- Google Fonts + External CSS Link (for consistency with provided template) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/pageEditor_validator.css"> <!-- External CSS link as per structure (kept for compatibility) -->
+    <style>
+        /* ============================================
+           GLOBAL VARIABLES + RESET (matches home page)
+           ============================================ */
+        :root {
+            --primary-dark: #1A3A1A;
+            --primary: #2D5A2D;
+            --primary-light: #3D6B3D;
+            --accent-fresh: #4CAF50;
+            --accent-mint: #81C784;
+            --accent-glow: #A5D6A7;
+            --bg-light: #E8F5E9;
+            --bg-card: #FFFFFF;
+            --text-dark: #1A3A1A;
+            --text-muted: #2E5C2E;
+            --white: #FFFFFF;
+            --shadow-sm: 0 6px 14px rgba(30, 70, 30, 0.08);
+            --shadow-md: 0 12px 28px rgba(30, 70, 30, 0.12);
+            --shadow-lg: 0 20px 35px -8px rgba(40, 80, 40, 0.2);
+            --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* ----- HEADER & NAVIGATION (identical to home page) ----- */
+        .site-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent-fresh);
+        }
+        
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.9rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent-fresh);
+            background: var(--bg-light);
+        }
+        
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .tagline {
+            font-size: 0.7rem;
+            color: var(--accent-fresh);
+            background: rgba(76, 175, 80, 0.12);
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        
+        .navbar ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .navbar a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 550;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--accent-fresh);
+            border-radius: 4px;
+            transition: width 0.25s ease;
+        }
+        
+        .navbar a:hover::after,
+        .navbar a.active-nav::after {
+            width: 100%;
+        }
+        
+        .navbar a:hover {
+            color: var(--accent-fresh);
+        }
+        
+        .navbar a.active-nav {
+            color: var(--accent-fresh);
+            font-weight: 700;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .outline-btn {
+            background: transparent;
+            border: 2px solid var(--accent-fresh);
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        
+        .outline-btn:hover {
+            background: var(--accent-fresh);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.25);
+        }
+        
+        /* ========== MAIN CONTAINER (two-column layout from template) ========== */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        main {
+            flex: 3;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+        }
+        
+        aside {
+            flex: 1;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            padding: 1.8rem;
+            align-self: start;
+            position: sticky;
+            top: 100px;
+        }
+        
+        /* Section styling */
+        section {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+            padding-bottom: 1.8rem;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-left: 6px solid var(--accent-fresh);
+            padding-left: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 1.5rem 0 0.8rem 0;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #2c3e2c;
+        }
+        
+        a {
+            color: var(--accent-fresh);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: var(--accent-fresh);
+            color: white;
+            margin-right: 12px;
+            margin-top: 6px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-validation {
+            background: var(--primary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary-light);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.2);
+        }
+        
+        .btn-validation:hover {
+            background: #1E4A1E;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background: var(--primary-dark);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .yes {
+            color: green;
+            font-weight: bold;
+        }
+        
+        .no {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .ref-list {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .ref-list li {
+            margin-bottom: 0.7rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-mint);
+        }
+        
+        .top {
+            text-align: right;
+            margin-top: 1.5rem;
+        }
+        
+        .top a {
+            background: var(--accent-fresh);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .top a:hover {
+            background: var(--primary-dark);
+            text-decoration: none;
+        }
+        
+        /* aside navigation */
+        aside h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-left: none;
+            padding-left: 0;
+            color: var(--primary-dark);
+        }
+        
+        .top-level-ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .top-level-ul > li {
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .top-level-ul ul {
+            margin-left: 1rem;
+            list-style: circle;
+        }
+        
+        .top-level-ul a {
+            font-weight: normal;
+            font-size: 0.85rem;
+        }
+        
+        /* Footer styling */
+        .main-footer {
+            background: var(--primary-dark);
+            color: var(--bg-light);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--accent-mint);
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-glow);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: #C8E6C9;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin: 0.6rem 0;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent-mint);
+            transform: translateX(6px);
+        }
+        
+        .student-details {
+            background: rgba(129, 199, 132, 0.12);
+            padding: 0.75rem;
+            border-radius: 16px;
+            margin-top: 0.5rem;
+        }
+        
+        .student-details p {
+            font-size: 0.75rem;
+            margin: 0.25rem 0;
+        }
+        
+        .donate-footer {
+            background: var(--accent-fresh);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(129, 199, 132, 0.3);
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+            aside {
+                position: static;
+            }
+            .header-inner {
+                flex-direction: column;
+            }
+            .navbar ul {
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - Identical to Home Page (ALIGN branding) -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo promoting equality" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Student info banner (intro) -->
+    <div style="max-width: 1400px; margin: 1rem auto 0; padding: 0 2rem;">
+        <div style="background: var(--bg-light); border-left: 8px solid var(--accent-fresh); padding: 1.2rem 1.8rem; border-radius: 24px;">
+            <h2 style="margin:0 0 0.3rem;">Page Editor: K.W.R.P Fonseka</h2>
+            <p style="margin:0;"><strong>Student ID:</strong> 20240786 | <strong>Role:</strong> Template & Navigation, Home Page, Gallery Page, Content Page (Digital Divide) | <strong>Team:</strong> ALIGN</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- MAIN CONTENT (Detailed sections) -->
+        <main>
+            <!-- Home Page Section -->
+            <section id="home">
+                <h2>Home Page</h2>
+                <h3>Technical Description</h3>
+                <p>The Home Page follows semantic HTML5 to structure the hero area, mission cards, and call-to-action. <code>&lt;header&gt;</code> holds the brand and global navigation; <code>&lt;main&gt;</code> contains <code>&lt;section&gt;</code> elements for the hero, cards, and bottom CTA. CSS Grid + Flexbox were combined: the card container uses <code>display: grid</code> with <code>repeat(auto-fill, minmax(300px, 1fr))</code> to create responsive card rows. A subtle keyframe animation (<code>@keyframes gentleRise</code>) fades in the hero headline. Hover effects (<code>transform: translateY(-8px)</code> + shadow) increase engagement. Embedded page-specific CSS (5+ rules) includes gradient overlays, custom button styles, and a pulse effect on the donation CTA.</p>
+                
+                <h3>Accessibility</h3>
+                <p>All images include descriptive <code>alt</code> text. Heading hierarchy (<code>h1</code> → <code>h2</code> → <code>h3</code>) is logical for screen readers. The navigation bar uses <code>aria-label</code>. Interactive cards have keyboard focus indicators and sufficient contrast (WCAG AA). The "Get Involved" button has a clear hover/focus state.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST1.html#home" target="_blank">📋 View HTML/CSS Validation for Home Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="home.html" target="_blank" class="btn btn-page">🔗 Open Home Page</a></p>
+            </section>
+
+            <!-- Gallery Page Section -->
+            <section id="gallery">
+                <h2>Gallery Page</h2>
+                <h3>Technical Description</h3>
+                <p>Gallery uses CSS Grid (<code>grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))</code>) for responsive thumbnails. Each thumbnail card contains an image, title, and description with a hover zoom effect. A modal popup (<code>position: fixed</code>, <code>backdrop-filter: blur(4px)</code>) is implemented with JavaScript. Event listeners populate modal content dynamically when clicking thumbnails, supporting close via button or ESC key. User customization panel (font/color) leverages JavaScript DOM manipulation to modify modal text styles.</p>
+                
+                <h3>Accessibility</h3>
+                <p>Modal includes <code>role="dialog"</code> and <code>aria-modal="true"</code>. Close button has <code>aria-label</code>. Thumbnail images contain alt text. Keyboard navigation allows tabbing through thumbnails and closing modal with Escape. The customization buttons are focusable and labeled.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST1.html#gallery" target="_blank">📋 View Validation for Gallery Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="gallery.html" target="_blank" class="btn btn-page">🔗 Open Gallery Page</a></p>
+            </section>
+
+            <!-- Content Page (Digital Divide) -->
+            <section id="content">
+                <h2>Content Page: Digital Divide</h2>
+                <h3>Technical Description</h3>
+                <p>This long-form content page addresses digital inequality. It uses internal anchor navigation with <code>id</code> attributes (<code>#overview</code>, <code>#challenges</code>, etc.) and <code>scroll-behavior: smooth</code>. Images float left/right using <code>float: left/right</code> and a clearfix for text wrapping. A fixed-position "Go to Top" button improves navigation. Flexbox is used for the two-column solution cards. Highlight boxes (<code>.highlight-box</code>) with <code>background: #E8F5E9</code> draw attention to key statistics. The page also features an embedded <code>&lt;figure&gt;</code> with <code>&lt;figcaption&gt;</code> for semantic image captions.</p>
+                
+                <h3>Accessibility</h3>
+                <p>Proper heading structure (H1, H2, H3) ensures readability. All images have descriptive alt text. Internal skip links facilitate keyboard navigation. Contrast between text and background meets WCAG guidelines, and the "Go to Top" button is accessible via keyboard. ARIA landmarks define main regions.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST1.html#content" target="_blank">View Validation for Content Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="content_ST1.html" target="_blank" class="btn btn-page">Open Digital Divide Content Page</a></p>
+            </section>
+
+            <!-- Challenges and Lessons Learned -->
+            <section id="challenge">
+                <h2>Challenges and Lessons Learned</h2>
+                <p><strong>1. Gallery Modal JavaScript vs CSS :target</strong> – Initially I attempted using CSS <code>:target</code> for modals but the coursework required interactive JavaScript. I refactored to event listeners, dynamic content injection, and ESC key handling. Lesson: always confirm technical requirements before implementation.</p>
+                <p><strong>2. CSS Variable Conflicts Across Team Pages</strong> – Some team members used undefined custom properties (e.g., <code>--accent-gold</code>). I standardized the root variables (green theme) and communicated to the team, ensuring visual consistency. Lesson: consistent naming convention and communication prevent rework.</p>
+                <p><strong>3. Responsive Modal on Mobile</strong> – The modal initially overflowed on small screens. I added media queries to set modal width to 90%, reduced padding, and ensured images scale. Testing across devices early solved the issue.</p>
+            </section>
+
+            <!-- Compliance (JANET) -->
+            <section id="compliance">
+                <h2>Compliance with JANET Regulations</h2>
+                <p>All pages I created comply with JANET (UK academic network) regulations: no offensive or discriminatory content; materials are educational, promoting SDG 10. Images are royalty-free from iStock/Unsplash and properly cited. I did not copy text from external sources; original writing with cited statistics. No malicious scripts, tracking, or data collection without consent. The website presents a professional, ethical tone and respects copyright. External resources follow fair use and reference guidelines.</p>
+                <p>For more details: <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank">JANET compliance lecture notes</a></p>
+            </section>
+
+            <!-- Group Meetings & Contribution Log (with full 7 entries) -->
+            <section id="group">
+                <h2>Group Meetings and Individual Contribution Log</h2>
+                <p>Below is a detailed log of all group meetings during the project, highlighting my individual contributions as Student 1 (Template, Home, Gallery, Content).</p>
+                <table>
+                    <thead>
+                        <tr><th colspan="6">Group Meetings and Contribution Log – Student 1 (K.W.R.P Fonseka)</th></tr>
+                        <tr><th>Meeting</th><th>Date & Time</th><th>Format</th><th>Objective</th><th>Attended</th><th>My Individual Contribution</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Feb 15, 2026 · 14:00</td><td>Face-to-face</td><td>Agree SDG 10 and assign roles</td><td class="yes">Yes</td><td>Proposed the "Digital Divide" sub-theme, volunteered to build template and Home/Gallery/Content pages. Shared initial wireframes.</td></tr>
+                        <tr><td>2</td><td>Feb 27, 2026 · 16:30</td><td>Online (Zoom)</td><td>Review template structure & navigation</td><td class="yes">Yes</td><td>Presented the reusable header/footer, CSS variables, and flex/grid layout. Explained how others can extend the design. Resolved team questions on responsiveness.</td></tr>
+                        <tr><td>3</td><td>Mar 04, 2026 · 13:00</td><td>Face-to-face</td><td>Review Home Page and Gallery prototypes</td><td class="yes">Yes</td><td>Demonstrated card layout, modal gallery with JS, got feedback on thumbnail sizing. Implemented hover effects after suggestions.</td></tr>
+                        <tr><td>4</td><td>Mar 10, 2026 · 12:30</td><td>Face-to-face</td><td>Check JavaScript interactivity & cross-linking</td><td class="yes">Yes</td><td>Helped team integrate global CSS, fixed modal ESC key binding, and verified all navigation links. Assisted with content page anchor smooth scroll.</td></tr>
+                        <tr><td>5</td><td>Mar 17, 2026 · 17:00</td><td>Online (Discord)</td><td>Testing, validation & bug fixes</td><td class="yes">Yes</td><td>Ran W3C validators for all my pages, corrected alt attributes, resolved contrast issues. Created validation snapshots for Home/Gallery/Content.</td></tr>
+                        <tr><td>6</td><td>Mar 24, 2026 · 14:15</td><td>Face-to-face</td><td>Content alignment & navigation order</td><td class="yes">Yes</td><td>Reordered menu items to match sitemap, ensured content page statistics accuracy, added "Go to Top" button across all my pages.</td></tr>
+                        <tr><td>7</td><td>Mar 28, 2026 · 10:00</td><td>Face-to-face</td><td>Final review, submission prep</td><td class="yes">Yes</td><td>Consolidated all files, zipped project, checked that Page Editor includes full meeting log, signed group contract, and submitted validation links.</td></tr>
+                    </tbody>
+                </table>
+                <p>Throughout the process, I maintained regular communication via WhatsApp and ensured timely integration of components.</p>
+            </section>
+
+            <!-- References -->
+            <section id="ref">
+                <h2>References</h2>
+                <ul class="ref-list">
+                    <li>W3Schools (2026) <em>HTML/CSS/JS Tutorials</em>. Available at: <a href="https://www.w3schools.com/" target="_blank">https://www.w3schools.com/</a> (Accessed: March 2026).</li>
+                    <li>MDN Web Docs (2026) <em>CSS Grid Layout & Accessibility</em>. Available at: <a href="https://developer.mozilla.org/" target="_blank">https://developer.mozilla.org/</a> (Accessed: March 2026).</li>
+                    <li>iStockPhoto (2026) <em>Royalty-free stock imagery</em>. Available at: <a href="https://www.istockphoto.com/" target="_blank">https://www.istockphoto.com/</a> (Accessed: Feb 2026).</li>
+                    <li>Duckett, J. (2011) <em>HTML and CSS: Design and Build Websites</em>.</li>
+                    <li>Lecture notesUniversity of Westminster, Weeks 4–10 (2026).</li>
+                </ul>
+            </section>
+
+            <div class="top"><a href="#top">↑ Go to Top</a></div>
+        </main>
+
+        <!-- ASIDE SIDEBAR (internal navigation with properly linked core pages) -->
+        <aside>
+            <h3>Core pages developed</h3>
+            <ul class="top-level-ul">
+                <li>Student 1 (K.W.R.P Fonseka)</li>
+                <ul>
+                    <li><a href="#home">Home Page (section details)</a></li>
+                    <li><a href="#gallery">Gallery Page (section details)</a></li>
+                    <li><a href="#content">Content Page (section details)</a></li>
+                </ul>
+               
+                <li><a href="#challenge">Challenges & Lessons Learned</a></li>
+                <li><a href="#compliance">Compliance (JANET)</a></li>
+                <li><a href="#group">Meetings & Contribution Log</a></li>
+                <li><a href="#ref">References</a></li>
+            </ul>
+            <hr style="margin: 1.5rem 0; border-color: #e0e0e0;">
+            <div style="font-size: 0.8rem; color: #666;">
+                <p><strong>Quick Links to Pages:</strong></p>
+                <p><a href="home.html" target="_blank">Home Page</a><br>
+                <a href="gallery.html" target="_blank">Gallery Page</a><br>
+                <a href="content_ST1.html" target="_blank">Content Page (Digital Divide)</a></p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- FOOTER - same as home page with student details -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST1.html">Page Editor</a></p>
+                <p><a href="validation_ST1.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> K.W.R.P Fonseka</p>
+                    <p><strong>Student ID:</strong> 20240786</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> Template, Home, Gallery, Content Page (Digital Divide)</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

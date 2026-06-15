@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor · ALIGN | Student 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .editor-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .nav {
+            background: #E8F5E9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid var(--accent-glow);
+        }
+        
+        .nav a {
+            color: #2d5a2d;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            display: inline-block;
+            background: white;
+            border-radius: 20px;
+        }
+        
+        .nav a:hover {
+            background: #2d5a2d;
+            color: white;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .info-box h2 {
+            color: #2d5a2d;
+        }
+        
+        .tasks {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            color: #2d5a2d;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 10px 10px 10px 0;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+        
+        .btn-page {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-validation {
+            background: #2d5a2d;
+            color: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background: #2d5a2d;
+            color: white;
+        }
+        
+        .yes {
+            color: green;
+            font-weight: bold;
+        }
+        
+        .ref-list {
+            list-style: none;
+        }
+        
+        .ref-list li {
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .go-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            z-index: 9999;
+        }
+        
+        .go-top:hover {
+            background: #2d5a2d;
+        }
+        
+        @media (max-width: 768px) {
+            .editor-container {
+                padding: 10px;
+            }
+            .nav a {
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="editor-container">
+        <div class="nav">
+            <a href="#student-info">Student Info</a>
+            <a href="#content">Content Page</a>
+            <a href="#simulator">Impact Simulator</a>
+            <a href="#splash">Splash Screen</a>
+            <a href="#challenges">Challenges</a>
+            <a href="#meetings">Meeting Log</a>
+            <a href="#references">References</a>
+        </div>
+        
+        <div id="student-info" class="info-box">
+            <h2>👤 Student Information</h2>
+            <p><strong>Name:</strong> M.S.M. Zaidh</p>
+            <p><strong>Student ID:</strong> 20241116</p>
+            <p><strong>Role:</strong> Splash Screen, Impact Simulator, Content Page</p>
+            <p><strong>Team:</strong> ALIGN</p>
+            <div class="tasks">
+                <h3>✅ Pages I Created</h3>
+                <ul>
+                    <li>Splash Screen (splash.html)</li>
+                    <li>Action Impact Simulator (ais.html)</li>
+                    <li>Content Page (content_ST2.html)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="content" class="section">
+            <h2>📄 Content Page - Cost Barriers</h2>
+            <p>
+                <a href="content_ST2.html" class="btn btn-page" target="_blank">View Content Page</a>
+                <a href="validation_ST2.html#content-validation" class="btn btn-validation" target="_blank">View Validation</a>
+            </p>
+            <h3>HTML Structure</h3>
+            <p>I used figure and figcaption for images, internal navigation for jumping between sections, and proper heading hierarchy.</p>
+            <h3>CSS Techniques</h3>
+            <p>Used float for images, flexbox for two-column layout, and fixed position for the "Go to Top" button.</p>
+        </div>
+        
+        <div id="simulator" class="section">
+            <h2>🎮 Action Impact Simulator</h2>
+            <p>
+                <a href="ais.html" class="btn btn-page" target="_blank">View Impact Simulator</a>
+                <a href="validation_ST2.html#simulator-validation" class="btn btn-validation" target="_blank">View Validation</a>
+            </p>
+            <h3>JavaScript Features</h3>
+            <p>Score calculation, impact levels (Low, Medium, High), and background change based on score.</p>
+        </div>
+        
+        <div id="splash" class="section">
+            <h2>✨ Splash Screen</h2>
+            <p>
+                <a href="Splash.html" class="btn btn-page" target="_blank">View Splash Screen</a>
+                <a href="validation_ST2.html#splash-validation" class="btn btn-validation" target="_blank">View Validation</a>
+            </p>
+            <h3>Features</h3>
+            <p>Countdown timer, CSS loader animation, skip button, and auto-redirect to home page.</p>
+        </div>
+        
+        <div id="challenges" class="section">
+            <h2>⚠️ Challenges I Faced</h2>
+            <h3>1. Image Floating</h3>
+            <p>Used figure tags with float and clearfix to fix text wrapping issues.</p>
+            <h3>2. Filename Spaces</h3>
+            <p>Used hyphen to replace spaces in filenames.</p>
+            <h3>3. Simulator Background</h3>
+            <p>Used JavaScript to change background dynamically based on score.</p>
+        </div>
+        
+        <div id="meetings" class="section">
+            <h2>📅 Group Meetings</h2>
+           <table>
+    <thead>
+        <tr>
+            <th colspan="6">Group Meetings and Contribution Log</th>
+        </tr>
+        <tr>
+            <th>Meeting</th>
+            <th>Date</th>
+            <th>Format</th>
+            <th>What We Did</th>
+            <th>Attended</th>
+            <th>My Contribution</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Feb 15, 2026</td>
+            <td>Face-to-face</td>
+            <td>Agreed on SDG 10 (Reduced Inequalities) and assigned roles</td>
+            <td><strong style="color:green;">Yes</strong></td>
+            <td>Suggested "cost barriers" theme, took Student 2 role.</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Feb 27, 2026</td>
+            <td>Online</td>
+            <td>Reviewed template design</td>
+            <td><strong style="color:green;">Yes</strong></td>
+            <td>Presented HTML template, explained how to use it.</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>March 04, 2026</td>
+            <td>Face-to-face</td>
+            <td>Reviewed Home Page and Gallery</td>
+            <td><strong style="color:green;">Yes</strong></td>
+            <td>Showed card layout and gallery modals, checked whether chosen images matched our SDG and got leader feedback.</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>March 10, 2026</td>
+            <td>Face-to-face</td>
+            <td>Checked JavaScript, CSS and links</td>
+            <td><strong style="color:green;">Yes</strong></td>
+            <td>Helped fix CSS and JavaScript to match my part.</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>March 17, 2026</td>
+            <td>Online</td>
+            <td>Testing and validation</td>
+            <td><strong style="color:green;">Yes</strong></td>
+            <td>Checked all links, helped with validation errors.</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>March 24, 2026</td>
+            <td>Face-to-face</td>
+            <td>Reading the content and check on navigations</td>
+            <td><strong style="color:green;">Yes</strong></td>
+            <td>Fixed unmatched content and ordered navigations.</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>March 28, 2026</td>
+            <td>Face-to-face</td>
+            <td>Final review and ready for submission</td>
+            <td><strong style="color:green;">Yes</strong></td>
+            <td>Checked on every part, as everything was clear and organized we filled the Contract and signed, zipped all documents.</td>
+        </tr>
+    </tbody>
+</table>
+            
+        </div>
+        
+        <div id="references" class="section">
+            <h2>📚 References</h2>
+            <ul class="ref-list">
+                <li>W3Schools - <a href="https://www.w3schools.com/html/" target="_blank">HTML Tutorial</a></li>
+                <li>W3Schools - <a href="https://www.w3schools.com/css/" target="_blank">CSS Tutorial</a></li>
+                <li>W3Schools - <a href="https://www.w3schools.com/js/" target="_blank">JavaScript Tutorial</a></li>
+                <li>MDN Web Docs: <a href="https://developer.mozilla.org/" target="_blank">https://developer.mozilla.org/</a> (Used for reference)</li>
+                <li>iStockPhoto: <a href="https://www.istockphoto.com/" target="_blank">https://www.istockphoto.com/</a> (Images used in website)</li>
+                <li>Lecture Notes - Week 1-8 (Used during the whole CW)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST2.html">Page Editor</a></p>
+                <p><a href="validation_ST2.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> M.S.M. Zaidh</p>
+                    <p><strong>Student ID:</strong> 20241116</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> Splash Screen, Impact Simulator, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+    
+    <a href="#" class="go-top">↑</a>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation · ALIGN | Student 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ============================================
+           VALIDATION PAGE SPECIFIC STYLES
+           ============================================ */
+        
+        .validation-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .validation-container h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+            font-size: 2rem;
+            border-left: 5px solid var(--accent-fresh);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .student-info {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .validation-section {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            border: 1px solid var(--accent-glow);
+            border-radius: 0.8rem;
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .validation-section h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .validation-section h3 {
+            color: var(--accent-fresh);
+            margin: 1rem 0 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .pass {
+            color: green;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .validation-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .validation-image img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .back-link:hover {
+            background: var(--accent-fresh);
+            transform: translateX(-5px);
+        }
+        
+        .core-pages {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 0.8rem;
+            margin: 1.5rem 0;
+        }
+        
+        .core-pages h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .core-pages ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            list-style: none;
+        }
+        
+        .core-pages li {
+            padding: 0.3rem 0;
+        }
+        
+        .core-pages strong {
+            color: var(--accent-fresh);
+        }
+        
+        .go-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-fresh);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            z-index: 9999;
+            transition: var(--transition);
+        }
+        
+        .go-top:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .validation-container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            .core-pages ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - Same as Home Page -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="validation-container">
+        <h1>✅ HTML Validation Report</h1>
+        
+        <!-- Student Information -->
+        <div class="student-info">
+            <p><strong>Student Name:</strong> M.S.M. Zaidh</p>
+            <p><strong>Student ID:</strong> 20241116</p>
+            <p><strong>Team:</strong> ALIGN</p>
+            <p><strong>Role:</strong> Splash Screen, Action Impact Simulator, Content Page</p>
+        </div>
+        
+        <!-- Core Pages Developed -->
+        <div class="core-pages">
+            <h3>📄 Pages Developed by Me</h3>
+            <ul>
+                <li><strong>Splash Screen:</strong><a href ="splash.html">Splash Screen</a></li>
+                <li><strong>Action Impact Simulator:</strong><a href=" ais.html">Action impact simulator</a></li>
+                <li><strong>Content Page:</strong><a href=" content_ST2.html">Content page(Cost Barriers)</a></li>
+            </ul>
+        </div>
+        
+        <!-- Splash Screen Validation -->
+        <div id="splash-validation" class="validation-section">
+            <h2>🌟 Splash Screen Page (splash.html)</h2>
+            <p class="pass">✅ Validation Status: <strong>PASSED - No Errors</strong></p>
+            
+            <div class="validation-image">
+                <img src="Splashvalidation.jpeg" alt="Splash Screen validation screenshot" onerror="this.src='https://placehold.co/800x400/4CAF50/white?text=Splash+Screen+Validation+Passed'">
+                <p><em>W3C Validator screenshot showing successful validation</em></p>
+            </div>
+            
+            <h3>📝 Reflection</h3>
+            <p>The Splash Screen page validation passed with no errors. I initially had issues with heading level skipping (h3 to h1). I fixed this by changing the card headings from h3 to h2 to maintain proper document outline. The page now validates successfully and follows accessibility best practices. I also ensured that all images have proper alt text and the countdown timer uses appropriate HTML structure.</p>
+            
+            <a href="pageEditor_ST2.html#splash" class="back-link">⬅ Back to Page Editor (Splash Screen Section)</a>
+        </div>
+        
+        <!-- Impact Simulator Validation -->
+        <div id="simulator-validation" class="validation-section">
+            <h2>🎮 Impact Simulator Page (ais.html)</h2>
+            <p class="pass">✅ Validation Status: <strong>PASSED - No Errors</strong></p>
+            
+            <div class="validation-image">
+                <img src="aisvalidation.jpeg" alt="Impact Simulator validation screenshot" onerror="this.src='https://placehold.co/800x400/81C784/white?text=Simulator+Page+Validation+Passed'">
+                <p><em>W3C Validator screenshot showing successful validation</em></p>
+            </div>
+            
+            <h3>📝 Reflection</h3>
+            <p>The Impact Simulator page had 6 validation errors initially. The main issue was div elements nested inside code tags. Since the code tag only accepts inline elements, I replaced all the div tags with span tags and added <code>display: block;</code> in the CSS to keep the layout unchanged. This taught me that not all elements can be freely nested — each element has a content model that restricts what is valid inside it. After these fixes, the page passed validation with no errors.</p>
+            
+            <a href="pageEditor_ST2.html#simulator" class="back-link">⬅ Back to Page Editor (Impact Simulator Section)</a>
+        </div>
+        
+        <!-- Content Page Validation -->
+        <div id="content-validation" class="validation-section">
+            <h2>📄 Content Page (content_ST2.html)</h2>
+            <p class="pass">✅ Validation Status: <strong>PASSED - No Errors</strong></p>
+            
+            <div class="validation-image">
+                <img src="contentvalidation_ST2.jpeg" alt="Content page validation screenshot" onerror="this.src='https://placehold.co/800x400/2D5A2D/white?text=Content+Page+Validation+Passed'">
+                <p><em>W3C Validator screenshot showing successful validation</em></p>
+            </div>
+            
+            <h3>📝 Reflection</h3>
+            <p>The Content Page validation passed after fixing issues with image filenames containing spaces. I replaced spaces in filenames with hyphens to ensure proper URL encoding. I also fixed improper use of figure and figcaption elements — I changed the image containers to use proper figure/figcaption structure for images with captions. The page now has a proper heading structure (h1 to h3) and all images have appropriate alt text describing the content related to digital cost barriers.</p>
+            
+            <a href="pageEditor_ST2.html#content" class="back-link">⬅ Back to Page Editor (Content Page Section)</a>
+        </div>
+        
+        <!-- Overall Validation Summary -->
+        <div class="validation-section">
+            <h2>📋 Overall Validation Summary</h2>
+            <p>All three pages I implemented (Splash Screen, Impact Simulator, Content Page) passed W3C HTML validation with no errors. The main challenges I faced and resolved were:</p>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li><strong>Spaces in filenames:</strong> Using hyphens instead of spaces solved this issue</li>
+                <li><strong>Heading hierarchy:</strong> Ensuring proper sequential heading levels (h1 → h2 → h3)</li>
+                <li><strong>Element nesting restrictions:</strong> Learning which elements can contain which others (e.g., code tags only accept inline elements)</li>
+                <li><strong>Figure and figcaption usage:</strong> Using proper semantic elements for images with captions</li>
+            </ul>
+            <p style="margin-top: 1rem;">The validation process helped me write cleaner, more semantic HTML and understand web standards better. It also improved the accessibility of my pages by ensuring proper document structure and alt text for all images.</p>
+        </div>
+    </main>
+    
+    <a href="#" class="go-top" aria-label="Go to top" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">↑</a>
+    
+    <!-- FOOTER - Same as Home Page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST2.html">Page Editor</a></p>
+                <p><a href="validation_ST2.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> M.S.M. Zaidh</p>
+                    <p><strong>Student ID:</strong> 20241116</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> Splash Screen, Impact Simulator, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

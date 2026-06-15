@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor · ALIGN | Senuth Hansira Karunaratne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS VARIABLES - Same as Home Page / Global Identity
+           ============================================ */
+        :root {
+            --primary-dark: #1A3A1A;
+            --primary: #2D5A2D;
+            --primary-light: #3D6B3D;
+            --accent-fresh: #4CAF50;
+            --accent-mint: #81C784;
+            --accent-glow: #A5D6A7;
+            --bg-light: #E8F5E9;
+            --bg-card: #FFFFFF;
+            --text-dark: #1A3A1A;
+            --text-muted: #2E5C2E;
+            --white: #FFFFFF;
+            --shadow-sm: 0 6px 14px rgba(30, 70, 30, 0.08);
+            --shadow-md: 0 12px 28px rgba(30, 70, 30, 0.12);
+            --shadow-lg: 0 20px 35px -8px rgba(40, 80, 40, 0.2);
+            --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .site-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent-fresh);
+        }
+        
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.9rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent-fresh);
+            background: var(--bg-light);
+        }
+        
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .tagline {
+            font-size: 0.7rem;
+            color: var(--accent-fresh);
+            background: rgba(76, 175, 80, 0.12);
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .navbar ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .navbar a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 550;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--accent-fresh);
+            border-radius: 4px;
+            transition: width 0.25s ease;
+        }
+        
+        .navbar a:hover::after {
+            width: 100%;
+        }
+        
+        .navbar a:hover {
+            color: var(--accent-fresh);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .outline-btn {
+            background: transparent;
+            border: 2px solid var(--accent-fresh);
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        
+        .outline-btn:hover {
+            background: var(--accent-fresh);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.25);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        main {
+            flex: 3;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+        }
+        
+        aside {
+            flex: 1;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            padding: 1.8rem;
+            align-self: start;
+            position: sticky;
+            top: 100px;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+            padding-bottom: 1.8rem;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-left: 6px solid var(--accent-fresh);
+            padding-left: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 1.5rem 0 0.8rem 0;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #2c3e2c;
+        }
+        
+        a {
+            color: var(--accent-fresh);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: var(--accent-fresh);
+            color: white;
+            margin-right: 12px;
+            margin-top: 6px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-validation {
+            background: var(--primary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary-light);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.2);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background: var(--primary-dark);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .yes {
+            color: green;
+            font-weight: bold;
+        }
+        
+        .no {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .ref-list {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .ref-list li {
+            margin-bottom: 0.7rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-mint);
+        }
+        
+        .top {
+            text-align: right;
+            margin-top: 1.5rem;
+        }
+        
+        .top a {
+            background: var(--accent-fresh);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .top a:hover {
+            background: var(--primary-dark);
+            text-decoration: none;
+        }
+        
+        aside h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-left: none;
+            padding-left: 0;
+            color: var(--primary-dark);
+        }
+        
+        .top-level-ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .top-level-ul > li {
+            font-weight: 700;
+            margin-top: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .top-level-ul ul {
+            margin-left: 1rem;
+            list-style: circle;
+        }
+        
+        .top-level-ul a {
+            font-weight: normal;
+            font-size: 0.85rem;
+        }
+        
+        .stud {
+            max-width: 1400px;
+            margin: 1rem auto 0;
+            padding: 0 2rem;
+        }
+        
+        .stud h2 {
+            background: var(--bg-light);
+            border-left: 8px solid var(--accent-fresh);
+            padding: 1.2rem 1.8rem;
+            border-radius: 24px;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        
+        .main-footer {
+            background: var(--primary-dark);
+            color: var(--bg-light);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--accent-mint);
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-glow);
+        }
+        
+        .footer-col p, .footer-col a {
+            color: #C8E6C9;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin: 0.6rem 0;
+            display: block;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent-mint);
+            transform: translateX(6px);
+        }
+        
+        .student-details {
+            background: rgba(129, 199, 132, 0.12);
+            padding: 0.75rem;
+            border-radius: 16px;
+            margin-top: 0.5rem;
+        }
+        
+        .student-details p {
+            font-size: 0.75rem;
+            margin: 0.25rem 0;
+        }
+        
+        .donate-footer {
+            background: var(--accent-fresh);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(129, 199, 132, 0.3);
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+            aside {
+                position: static;
+            }
+            .header-inner {
+                flex-direction: column;
+            }
+            .navbar ul {
+                justify-content: center;
+                gap: 1rem;
+            }
+            .stud h2 {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN - Reducing Inequalities Logo" class="brand-logo" onerror="this.src='https://placehold.co/48x48?text=ALIGN'">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="stud">
+        <h2>Senuth Hansira Karunaratne · Team ALIGN · Role: Feedback Page, Team Page, Content Page (Language Barriers)</h2>
+    </section>
+
+    <div class="container">
+        <main>
+            <!-- FEEDBACK PAGE SECTION -->
+            <section>
+                <h2 id="feedback">Feedback & Programme Directory Page</h2>
+                <h3>Technical Description</h3>
+                <p>The Feedback & Programme Directory page is built with semantic HTML5 and CSS Grid. The programme directory uses <code>overflow-y: auto</code> with <code>max-height: 480px</code> combined with CSS Grid <code>grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))</code> to create responsive programme cards. Each card is an <code>&lt;article&gt;</code> element featuring hover transitions (<code>transform: translateY(-4px)</code> and enhanced box-shadow) to improve interactivity. The feedback form leverages <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> for accessible grouping. Input types include <code>email</code>, <code>tel</code>, <code>date</code>, and a <code>&lt;textarea&gt;</code> with <code>maxlength="500"</code>. A two-column CSS Grid (<code>grid-template-columns: 1fr 1fr</code>) ensures paired fields align responsively, while custom validation states use JavaScript for real-time error handling.</p>
+                
+                <h3>JavaScript Implementation</h3>
+                <p>Three interactive features: a live character counter listening to the <code>input</code> event on the message field, updating remaining characters in real time. Comprehensive form validation checks required fields, validates email format via regex, ensures dropdown selections are not empty, and verifies message length (minimum 20 characters). Error messages appear adjacent to invalid fields using DOM manipulation. Real-time error clearing attaches <code>input</code> and <code>change</code> listeners, dismissing errors as the user corrects data.</p>
+                
+                <h3>Accessibility</h3>
+                <p>All images include descriptive <code>alt</code> attributes. Each form field pairs with a <code>&lt;label&gt;</code> using matching <code>for</code>/<code>id</code>. <code>&lt;fieldset&gt;</code> groupings enhance screen reader context. Confirmation messages use <code>role="alert"</code> for immediate announcements. Colour contrast meets WCAG 2.1 AA standards, ensuring inclusive design.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST3.html#feedbackVal" target="_blank">View Validation for Feedback Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="feedback.html" target="_blank">Open Feedback Page →</a></p>
+            </section>
+
+            <!-- TEAM PAGE SECTION -->
+            <section>
+                <h2 id="team">Team Page</h2>
+                <h3>Technical Description</h3>
+                <p>The Team Page showcases four group members using an interactive thumbnail grid. CSS Grid implements <code>grid-template-columns: repeat(4, 1fr)</code> on desktop, gracefully collapsing to 2 columns (tablet) and 1 column (mobile) via media queries. Each member block uses <code>&lt;div class="member-block"&gt;</code> containing a thumbnail, hover-reveal overlay, and name bar. Thumbnail images employ <code>object-fit: cover</code> for uniform appearance. The overlay expands below using CSS transitions on <code>max-height</code> (from 0 to 400px) for a smooth reveal. A numbered student badge uses absolute positioning with <code>border-radius: 50%</code> for visual prominence.</p>
+                
+                <h3>JavaScript Implementation</h3>
+                <p>Keyboard accessibility is enhanced by listening to <code>keydown</code> events on each member block. When Enter or Space is pressed, the <code>expanded</code> class toggles, replicating the hover visual state to support keyboard-only navigation. This ensures full parity between mouse and keyboard interaction.</p>
+                
+                <h3>Accessibility</h3>
+                <p>Each member block includes <code>tabindex="0"</code> to receive keyboard focus, <code>role="button"</code>, and descriptive <code>aria-label</code> identifying the team member. All images contain meaningful <code>alt</code> text, and a visible focus style matches the hover effect for clear orientation.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST3.html#teamVal" target="_blank">View Validation for Team Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="team.html" target="_blank">Open Team Page →</a></p>
+            </section>
+
+            <!-- CONTENT PAGE (Language Barriers) -->
+            <section>
+                <h2 id="content">Content Page: Language Barriers</h2>
+                <h3>Technical Description</h3>
+                <p>The Content Page follows a consistent ALIGN template with <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>. The main layout uses a two-column CSS Grid: <code>grid-template-columns: 220px 1fr</code> featuring a sticky internal navigation sidebar (<code>position: sticky; top: 84px;</code>) on the left, and article content on the right. Seven clearly labelled <code>&lt;section&gt;</code> elements each have unique IDs for anchor linking. Four relevant images incorporate <code>object-fit: contain</code>, <code>border-radius</code>, and <code>box-shadow</code> for modern aesthetics. A two-column image grid is implemented with <code>grid-template-columns: 1fr 1fr</code> to present visuals side-by-side. The "Go to Top" button is a fixed-position <code>&lt;a href="#top"&gt;</code> enhancing navigation ease.</p>
+                
+                <h3>Accessibility</h3>
+                <p>Internal navigation uses <code>&lt;aside aria-label="Page sections navigation"&gt;</code> and all images include descriptive <code>alt</code> text. Active navigation links employ <code>aria-current="page"</code>. Headings follow a strict hierarchical structure, and the layout collapses to a single column on mobile devices using media queries to preserve readability.</p>
+                
+                <h3>Link to the validation page</h3>
+                <p><a href="validation_ST3.html#contentVal" target="_blank">View Validation for Content Page →</a></p>
+                
+                <h3>Link to the page</h3>
+                <p><a href="content_ST3.html" target="_blank">Open Language Barriers Content Page →</a></p>
+            </section>
+
+            <!-- Challenges and Lessons Learned -->
+            <section>
+                <h2 id="challenge">Challenges and Lessons Learned</h2>
+                <p><strong>Challenge 1 — JavaScript Form Validation Complexity:</strong> Implementing granular inline error messages while ensuring real-time clearing required careful event management. I solved it by writing reusable validation helpers that attach individual <code>input</code> and <code>change</code> listeners, improving maintainability and user experience.</p>
+                <p><strong>Challenge 2 — Team Page Overlay Clipping:</strong> The initial overlay design caused clipping due to <code>overflow: hidden</code>. Restructuring the overlay as a sibling element with dynamic <code>max-height</code> transitions (0 → 400px) delivered a smooth reveal without clipping.</p>
+                <p><strong>Challenge 3 — Scrollable Programme Section Height:</strong> Finding the optimal <code>max-height</code> (480px) for the programme directory required testing across screen sizes to balance content visibility and layout integrity. This taught me the importance of iterative testing with real content.</p>
+                <p><strong>Lessons Learned:</strong> I gained deep insight into CSS architecture pitfalls, particularly the effect of <code>overflow</code> on child positioning. Additionally, I learned that writing modular JavaScript functions drastically reduces bugs and simplifies future enhancements.</p>
+            </section>
+
+            <!-- Compliance with JANET regulations -->
+            <section>
+                <h2 id="compliance">Compliance with JANET Regulations</h2>
+                <p><strong>Appropriate and Ethical Content:</strong> All pages (Feedback, Team, Content) focus on educational content aligned with SDG 10 — Reducing Inequalities. No harmful or illegal material is present, fully complying with Janet's Acceptable Use Policy (AUP).</p>
+                <p><strong>Data Protection and GDPR:</strong> The feedback form collects name, email, and telephone number for demonstration only; no data is transmitted or stored, ensuring compliance with GDPR principles and the UK Data Protection Act 2018.</p>
+                <p><strong>Copyright and Third-Party Resources:</strong> All images are sourced from royalty-free platforms (e.g., Unsplash) under appropriate licenses. Google Fonts are loaded via official CDN. All resources are properly referenced in the References section.</p>
+                <p><strong>Accessibility Compliance:</strong> Each page meets WCAG 2.1 AA standards through semantic markup, alt text, keyboard navigation, and high-contrast colour schemes — satisfying the Equality Act 2010 and Public Sector Bodies Accessibility Regulations.</p>
+                <p><strong>Network Security:</strong> No malicious scripts or unauthorized data collection are implemented. The website respects network resources and adheres to the Computer Misuse Act 1990. <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank">See the lecture notes for more details on compliance.</a></p>
+            </section>
+
+            <!-- Group Meetings and Individual Contribution Log -->
+            <section>
+                <h2 id="group">Group Meetings and Individual Contribution Log</h2>
+                <p>The table below documents my individual engagement with group work, focusing on personal contributions across a minimum of six meetings.</p>
+                
+                <table>
+                    <thead>
+                        <tr><th colspan="6">Group Meetings and Contribution Log – Student 3 (Senuth Hansira Karunaratne)</th></tr>
+                        <tr><th>Meeting</th><th>Date &amp; Time</th><th>Format</th><th>Objective</th><th>Attended</th><th>My Individual Contribution</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>15 Feb 2026 · 14:00</td><td>Face-to-face</td><td>Agree SDG and assign roles</td><td class="yes">Yes</td><td>I took ownership of Feedback Page, Team Page, and Content Page; proposed interactive elements to boost user engagement.</td></tr>
+                        <tr><td>2</td><td>27 Feb 2026 · 16:30</td><td>Online (Zoom)</td><td>Review template design and structure</td><td class="yes">Yes</td><td>Reviewed HTML templates and recommended fieldset/legend for accessibility on feedback form.</td></tr>
+                        <tr><td>3</td><td>04 Mar 2026 · 13:00</td><td>Face-to-face</td><td>Review Home Page and Gallery designs</td><td class="yes">Yes</td><td>Shared early Team Page hover-reveal concept, gathered feedback on overlay timing from peers.</td></tr>
+                        <tr><td>4</td><td>10 Mar 2026 · 12:30</td><td>Face-to-face</td><td>Check JavaScript, CSS and links</td><td class="yes">Yes</td><td>Debugged feedback form validation JavaScript and fixed CSS overflow on team member overlays.</td></tr>
+                        <tr><td>5</td><td>17 Mar 2026 · 17:00</td><td>Online (Discord)</td><td>Testing and validation</td><td class="yes">Yes</td><td>Ran pages through W3C validator, corrected heading hierarchy on content page, verified navigation links.</td></tr>
+                        <tr><td>6</td><td>24 Mar 2026 · 14:15</td><td>Face-to-face</td><td>Content review and navigation check</td><td class="yes">Yes</td><td>Ensured consistency of SDG 10 messaging across all my pages; helped reorder navigation menu for clarity.</td></tr>
+                        <tr><td>7</td><td>28 Mar 2026 · 10:00</td><td>Face-to-face</td><td>Final review and submission preparation</td><td class="yes">Yes</td><td>Conducted final accessibility audit, added missing ARIA labels, and assisted with submission packaging.</td></tr>
+                    </tbody>
+                </table>
+                <p>Throughout the project, I maintained active communication via WhatsApp and ensured seamless integration of all components.</p>
+            </section>
+
+            <!-- References -->
+            <section>
+                <h2 id="ref">References</h2>
+                <ul class="ref-list">
+                    <li>University of Westminster (2026) <em>4COSC011W Web Design and Development — Module Lecture Notes.</em> Blackboard Ultra. (Last accessed: March 2026).</li>
+                    <li>World Wide Web Consortium (W3C) (2018) <em>Web Content Accessibility Guidelines (WCAG) 2.1.</em> Available at: <a href="https://www.w3.org/TR/WCAG21/" target="_blank">https://www.w3.org/TR/WCAG21/</a> (Last accessed: March 2026).</li>
+                    <li>MDN Web Docs (2026) <em>HTML, CSS, JavaScript Reference Documentation.</em> Available at: <a href="https://developer.mozilla.org" target="_blank">https://developer.mozilla.org</a> (Last accessed: March 2026).</li>
+                    <li>W3Schools (2026) <em>HTML, CSS, JavaScript Tutorials.</em> Available at: <a href="https://www.w3schools.com" target="_blank">https://www.w3schools.com</a> (Last accessed: March 2026).</li>
+                    <li>Unsplash (2026) <em>Free High-Resolution Royalty-Free Photos.</em> Available at: <a href="https://unsplash.com" target="_blank">https://unsplash.com</a> (Last accessed: March 2026).</li>
+                    <li>Google Fonts (2026) <em>Playfair Display & Inter Typefaces.</em> Available at: <a href="https://fonts.google.com" target="_blank">https://fonts.google.com</a> (Last accessed: March 2026).</li>
+                    <li>United Nations (2026) <em>Sustainable Development Goal 10 — Reduced Inequalities.</em> Available at: <a href="https://sdgs.un.org/goals/goal10" target="_blank">https://sdgs.un.org/goals/goal10</a> (Last accessed: March 2026).</li>
+                    <li>Duckett, J. (2011) <em>HTML and CSS: Design and Build Websites.</em> Indianapolis: John Wiley & Sons.</li>
+                </ul>
+            </section>
+
+            <p class="top"><a href="#top">Go top</a></p>
+        </main>
+
+        <aside>
+            <h3>Core pages developed:</h3>
+            <ul class="top-level-ul">
+                <li>Student 3 (Senuth Hansira Karunaratne)</li>
+                <ul>
+                    <li><a href="#feedback">Feedback Page</a></li>
+                    <li><a href="#team">Team Page</a></li>
+                    <li><a href="#content">Content Page (Language Barriers)</a></li>
+                </ul>
+                <ul>
+                <li><a href="#challenge">Challenges and Lessons Learned</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#group">Group Meetings and Individual Contribution Log</a></li>
+                <li><a href="#ref">References</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col"><h3>Explore</h3><p><a href="home.html">Home</a></p><p><a href="gallery.html">Gallery</a></p><p><a href="ais.html">Impact Simulator</a></p><p><a href="sitemap.html">Sitemap</a></p></div>
+            <div class="footer-col"><h3>About</h3><p><a href="team.html">Team</a></p><p><a href="#">Mission</a></p><p><a href="#">FAQ</a></p><p><a href="#">Careers</a></p></div>
+            <div class="footer-col"><h3>Resources</h3><p><a href="#">Reports</a></p><p><a href="#">Data</a></p><p><a href="#">Support</a></p><p><a href="#">Blog</a></p></div>
+            <div class="footer-col"><h3>Contact</h3><p>Email: align@email.com</p><p>Tel: 011 7899 897</p><p>Phone: +94 77 989 9098</p><p>Colombo 05, Sri Lanka</p><div class="socials">🌐 📘 📸 ▶️</div><button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button></div>
+            <div class="footer-col"><h3>Legal & Support</h3><p><a href="pageEditor_ST3.html">Page Editor</a></p><p><a href="validation_ST3.html">Validation Page</a></p><p><a href="#">Accessibility</a></p><div class="student-details"><p><strong>Student Name:</strong> Senuth Hansira Karunaratne</p><p><strong>Student ID:</strong> 20250673</p><p><strong>Course:</strong> Web Development</p><p><strong>Role:</strong> Feedback Page, Team Page, Content Page (Language Barriers)</p></div></div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

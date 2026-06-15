@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile · ALIGN | SDG 10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Profile Page Specific Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+        :root {
+            --forest:    #1a3c2e;
+            --emerald:   #2d6a4f;
+            --sage:      #40916c;
+            --mist:      #d8f3dc;
+            --white:     #ffffff;
+            --card-bg:   #ffffff;
+            --text-dark: #1a3c2e;
+            --text-soft: #4a7c63;
+            --shadow:    0 4px 24px rgba(26, 60, 46, 0.10);
+            --radius:    16px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-light);
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--mist);
+        }
+
+        /* Profile image section */
+        #profile-img-section {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-glow);
+            border-radius: var(--radius);
+            max-width: 520px;
+            margin: 2rem auto 28px;
+            padding: 28px 32px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        #profile-img-section h2 {
+            color: var(--primary-dark);
+            border-bottom-color: var(--accent-glow);
+        }
+
+        #selected-image {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-fresh);
+            margin: 14px auto 0;
+            display: block;
+        }
+
+        #profile-image {
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        #profile-image::file-selector-button {
+            background: var(--accent-fresh);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+        #profile-image::file-selector-button:hover {
+            background: var(--primary);
+        }
+
+        /* Profile container */
+        #profile-container {
+            max-width: 520px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Progress bar */
+        #progress-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-glow);
+            border-radius: var(--radius);
+            padding: 22px 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        #steps-completed {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        #percent-filled {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        progress#progress {
+            width: 100%;
+            height: 10px;
+            border-radius: 99px;
+            border: none;
+            appearance: none;
+            background: var(--bg-light);
+            display: block;
+        }
+
+        progress#progress::-webkit-progress-value {
+            background: linear-gradient(90deg, var(--accent-fresh), var(--primary));
+            border-radius: 99px;
+        }
+
+        /* Section cards */
+        #section-personal-details,
+        #section-interests,
+        #section-actions {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 26px 30px;
+            box-shadow: var(--shadow-sm);
+            color: var(--text-dark);
+            border: 1px solid var(--accent-glow);
+        }
+
+        #section-personal-details p,
+        #section-interests p,
+        #section-actions p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            padding: 7px 0;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            gap: 6px;
+        }
+
+        #section-personal-details p:last-of-type,
+        #section-interests p:last-of-type,
+        #section-actions p:last-of-type {
+            border-bottom: none;
+        }
+
+        #section-personal-details p span,
+        #section-interests p span,
+        #section-actions p span {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        button {
+            background: var(--accent-fresh);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            padding: 13px 30px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            cursor: pointer;
+            align-self: center;
+            transition: var(--transition);
+        }
+
+        button:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        #Back_home {
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--accent-fresh);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        #Back_home:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            #profile-container {
+                padding: 0 15px;
+            }
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - Same as Home Page -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="inequality2.jpeg" alt="ALIGN logo" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
+            </div>
+            <nav class="navbar" aria-label="Main navigation">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">Impact Simulator</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html" class="active-nav">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
+        </div>
+    </header>
+
+    <h1>👤 Your Profile</h1>
+
+    <div id="profile-img-section">
+        <h2>Profile Image</h2>
+        <input type="file" id="profile-image" accept="image/*"><br>
+        <img id="selected-image" src="#" alt="Your Profile Image" style="width: 100px; height: 100px; display:block;">
+    </div>
+
+    <div id="profile-container">
+        <div id="progress-bar">
+            <p id="steps-completed">Steps completed: 0/3</p>
+            <progress id="progress" value="0" max="100"></progress>
+            <p id="percent-filled">Percentage Completed: 0%</p>
+        </div>
+
+        <div id="section-personal-details">
+            <h2>📋 Personal Details</h2>
+            <p>Name: <span id="name"></span></p>
+            <p>Username: <span id="username"></span></p>
+            <p>Role: <span id="role"></span></p>
+            <p>Email: <span id="email"></span></p>
+            <p>ID Card: <span id="IDCard"></span></p>   
+            <p>Phone number: <span id="tele"></span></p>
+            <p>Country: <span id="country"></span></p>
+            <p>Address: <span id="address"></span></p>
+        </div>
+
+        <div id="section-interests">
+            <h2>🎨 Interests or Preferences</h2>
+            <p>Interests: <span id="interests"></span></p>
+            <p>Preferences: <span id="preferences"></span></p>
+            <p>Hobbies: <span id="hobbies"></span></p>
+        </div>
+
+        <div id="section-actions">
+            <h2>🎯 Goals / Actions Taken / Tasks</h2>
+            <p>Goals: <span id="goals"></span></p>
+            <p>Actions taken: <span id="actions"></span></p>
+            <p>Tasks: <span id="tasks"></span></p>
+        </div>
+
+        <div class="button-group">
+            <button id="make-profile" onclick="makeProfile()">Start Profile Setup</button>
+            <button id="skip-all" onclick="skipAll()">Skip All for Now</button>
+        </div>
+        <button id="fill-skipped" style="display:none;">Fill in Skipped Sections</button>
+        <a href="home.html" id="Back_home">⬅ Back to Home Page</a>
+    </div>
+
+    <!-- FOOTER - Same as Home Page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <p><a href="home.html">Home</a></p>
+                <p><a href="gallery.html">Gallery</a></p>
+                <p><a href="ais.html">Impact Simulator</a></p>
+                <p><a href="sitemap.html">Sitemap</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>About</h3>
+                <p><a href="team.html">Team</a></p>
+                <p><a href="#">Mission</a></p>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <p><a href="#">Reports</a></p>
+                <p><a href="#">Data</a></p>
+                <p><a href="#">Support</a></p>
+                <p><a href="#">Blog</a></p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: align@email.com</p>
+                <p>Tel: 011 7899 897</p>
+                <p>Phone: +94 77 989 9098</p>
+                <p>Colombo 05, Sri Lanka</p>
+                <div class="socials">🌐 📘 📸 ▶️</div>
+                <button class="donate-footer" onclick="window.location.href='ais.html'">Become a Donor</button>
+            </div>
+            <div class="footer-col">
+                <h3>Legal & Support</h3>
+                <p><a href="pageEditor_ST4.html">Page Editor</a></p>
+                <p><a href="validation_ST4.html">Validation Page</a></p>
+                <p><a href="#">Accessibility</a></p>
+                <div class="student-details">
+                    <p><strong>Student Name:</strong> Olu Wadigasinghe</p>
+                    <p><strong>Student ID:</strong> 20250697</p>
+                    <p><strong>Course:</strong> Web Development</p>
+                    <p><strong>Role:</strong> User Profile, Sitemap, Content Page</p>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        //profile image upload 
+        document.getElementById("profile-image").onchange = function(){
+            let file = this.files[0];
+            let reader = new FileReader();
+            reader.onload = function(e){
+                document.getElementById("selected-image").src = e.target.result;
+                document.getElementById("selected-image").style.display = "block";
+                profile.image = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        };
+        
+        //profile object
+        let profile = {
+            name: null,
+            username: null,
+            role: null,
+            email: null,
+            IDCard: null,
+            tele: null,
+            country: null,
+            address: null,
+            interests: null,
+            preferences: null,
+            hobbies: null,
+            actions: null,
+            goals: null,
+            tasks: null
+        };
+
+        let totalSteps = 3;
+        
+        function updateProgress(filled, total){
+            let percent = Math.round(filled / total * 100);
+            document.getElementById("steps-completed").textContent = "Steps completed: " + filled + "/" + total;
+            document.getElementById("progress").value = percent;
+            document.getElementById("percent-filled").textContent = "Percentage Completed: " + percent.toFixed(2) + "%";
+        }
+
+        function isSectionComplete(fields){
+            for(let i = 0; i < fields.length; i++){
+                if(fields[i] === null || fields[i] === ""){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function recalculateProgress(){
+            let completedSteps = 0;
+            if(isSectionComplete([profile.name, profile.username, profile.role, profile.email, profile.IDCard, profile.tele, profile.country, profile.address])) completedSteps++;
+            if(isSectionComplete([profile.interests, profile.preferences, profile.hobbies])) completedSteps++;
+            if(isSectionComplete([profile.actions, profile.goals, profile.tasks])) completedSteps++;
+            updateProgress(completedSteps, totalSteps);
+        }
+
+        function returnToSkipped(){
+            let filled = false;
+            
+            if (profile.name == null){
+                let retry = prompt("You have skipped the name field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.name = retry;
+                    document.getElementById("name").textContent = retry;
+                    document.getElementById("name").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.username == null){
+                let retry = prompt("You have skipped the username field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.username = retry;
+                    document.getElementById("username").textContent = retry;
+                    document.getElementById("username").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.role == null){
+                let retry = prompt("You have skipped the role field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.role = retry;
+                    document.getElementById("role").textContent = retry;
+                    document.getElementById("role").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.email == null){
+                let retry = prompt("You have skipped the email field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.email = retry;
+                    document.getElementById("email").textContent = retry;
+                    document.getElementById("email").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.IDCard == null){
+                let retry = prompt("You have skipped the ID Card field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.IDCard = retry;
+                    document.getElementById("IDCard").textContent = retry;
+                    document.getElementById("IDCard").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.tele == null){
+                let retry = prompt("You have skipped the phone number field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.tele = retry;
+                    document.getElementById("tele").textContent = retry;
+                    document.getElementById("tele").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.country == null){
+                let retry = prompt("You have skipped the country field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.country = retry;
+                    document.getElementById("country").textContent = retry;
+                    document.getElementById("country").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.address == null){
+                let retry = prompt("You have skipped the address field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.address = retry;
+                    document.getElementById("address").textContent = retry;
+                    document.getElementById("address").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.interests == null){
+                let retry = prompt("You have skipped the interests field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.interests = retry;
+                    document.getElementById("interests").textContent = retry;
+                    document.getElementById("interests").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.preferences == null){
+                let retry = prompt("You have skipped the preferences field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.preferences = retry;
+                    document.getElementById("preferences").textContent = retry;
+                    document.getElementById("preferences").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.hobbies == null){
+                let retry = prompt("You have skipped the hobbies field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.hobbies = retry;
+                    document.getElementById("hobbies").textContent = retry;
+                    document.getElementById("hobbies").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.actions == null){
+                let retry = prompt("You have skipped the actions taken field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.actions = retry;
+                    document.getElementById("actions").textContent = retry;
+                    document.getElementById("actions").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.goals == null){
+                let retry = prompt("You have skipped the goals field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.goals = retry;
+                    document.getElementById("goals").textContent = retry;
+                    document.getElementById("goals").style.display = "block";
+                    filled = true;
+                }
+            }
+            if (profile.tasks == null){
+                let retry = prompt("You have skipped the tasks field. Enter now or press cancel to skip again.");
+                if (retry !== null && retry.trim() !== ""){
+                    profile.tasks = retry;
+                    document.getElementById("tasks").textContent = retry;
+                    document.getElementById("tasks").style.display = "block";
+                    filled = true;
+                }
+            }
+            if(filled){
+                recalculateProgress();
+            }
+        }
+
+        function makeProfile(){
+            document.getElementById("make-profile").style.display = "none";
+            document.getElementById("skip-all").style.display = "none";
+            let completedSteps = 0;
+            
+            //Personal details
+            let skipPersonal = confirm("Fill Personal Detail section? Click OK to fill or Cancel to skip entire section.");
+            if(skipPersonal){
+                let name = prompt("Please enter your name (letters only):");
+                while(name !== null && /\d/.test(name.trim())){
+                    name = prompt("Please enter a valid name (letters only):");
+                }
+                if(name !== null && name.trim() !== ""){
+                    profile.name = name;
+                    document.getElementById("name").textContent = name;
+                    document.getElementById("name").style.display = "block";
+                } else {
+                    profile.name = null;
+                    document.getElementById("name").style.display = "none";
+                }
+
+                let userName = prompt("Please enter your Username (no spaces, max 15 characters):");
+                while(userName !== null && (userName.trim() === "" || userName.trim().length > 15 || userName.includes(" "))){
+                    userName = prompt("Please enter a valid Username (no spaces, max 15 characters):");
+                }
+                if(userName !== null && userName.trim() !== ""){
+                    profile.username = userName;
+                    document.getElementById("username").textContent = userName;
+                    document.getElementById("username").style.display = "block";
+                } else {
+                    profile.username = null;
+                    document.getElementById("username").style.display = "none";
+                }
+
+                let role = prompt("Please enter your role:");
+                while (role !== null && /\d/.test(role.trim())){
+                    role = prompt("Please enter a valid role (only letters and spaces):");
+                }
+                if(role !== null && role.trim() !== ""){
+                    profile.role = role;
+                    document.getElementById("role").textContent = role;
+                    document.getElementById("role").style.display = "block";
+                } else {
+                    profile.role = null;
+                    document.getElementById("role").style.display = "none";
+                }
+
+                let userEmail = prompt("Please enter your email:");
+                while(userEmail !== null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail.trim())){
+                    userEmail = prompt("Please enter a valid email eg: name@example.com:");
+                }
+                if(userEmail !== null && userEmail.trim() !== ""){
+                    profile.email = userEmail;
+                    document.getElementById("email").textContent = userEmail;
+                    document.getElementById("email").style.display = "block";
+                } else {
+                    profile.email = null;
+                    document.getElementById("email").style.display = "none";
+                }
+
+                let userId = prompt("Please enter your ID:");
+                if(userId !== null && userId.trim() !== ""){
+                    profile.IDCard = userId;
+                    document.getElementById("IDCard").textContent = userId;
+                    document.getElementById("IDCard").style.display = "block";
+                } else {
+                    profile.IDCard = null;
+                    document.getElementById("IDCard").style.display = "none";
+                }
+
+                let userPhone = prompt("Please enter your phone number (10 digits):");
+                while(userPhone !== null && !/^\d{10}$/.test(userPhone.trim())){
+                    userPhone = prompt("Please enter a valid phone number (10 digits):");
+                }
+                if(userPhone !== null && userPhone.trim() !== ""){
+                    profile.tele = userPhone;
+                    document.getElementById("tele").textContent = userPhone;
+                    document.getElementById("tele").style.display = "block";
+                } else {
+                    profile.tele = null;
+                    document.getElementById("tele").style.display = "none";
+                }
+
+                let userCountry = prompt("Please enter your country (only letters and spaces):");
+                while (userCountry !== null && /\d/.test(userCountry.trim())){
+                    userCountry = prompt("Please enter a valid country name (only letters and spaces):");
+                }
+                if(userCountry !== null && userCountry.trim() !== ""){
+                    profile.country = userCountry;
+                    document.getElementById("country").textContent = userCountry;
+                    document.getElementById("country").style.display = "block";
+                } else {
+                    profile.country = null;
+                    document.getElementById("country").style.display = "none";
+                }
+
+                let userAddress = prompt("Please enter your address:");
+                if(userAddress !== null && userAddress.trim() !== ""){
+                    profile.address = userAddress;
+                    document.getElementById("address").textContent = userAddress;
+                    document.getElementById("address").style.display = "block";
+                } else {
+                    profile.address = null;
+                    document.getElementById("address").style.display = "none";
+                }
+
+                let personalDetailsComplete = isSectionComplete([profile.name, profile.username, profile.role, profile.email, profile.IDCard, profile.tele, profile.country, profile.address]);
+                if(personalDetailsComplete) completedSteps++;
+                updateProgress(completedSteps, totalSteps);
+            }
+            document.getElementById("section-personal-details").style.display = "block";
+
+            //Interests or preferences
+            let skipInterests = confirm("Do you want to fill interests section? Click OK to proceed, Cancel to skip entire section for now");
+            if (skipInterests){
+                let userInterests = prompt("Please enter your interests or preferences:");
+                if(userInterests !== null && userInterests.trim() !== ""){
+                    profile.interests = userInterests;
+                    document.getElementById("interests").textContent = userInterests;
+                    document.getElementById("interests").style.display = "block";
+                } else {
+                    profile.interests = null;
+                    document.getElementById("interests").style.display = "none";
+                }
+
+                let preferences = prompt("Please enter your preferences:");
+                if(preferences !== null && preferences.trim() !== ""){
+                    profile.preferences = preferences;
+                    document.getElementById("preferences").textContent = preferences;
+                    document.getElementById("preferences").style.display = "block";
+                } else {
+                    profile.preferences = null;
+                    document.getElementById("preferences").style.display = "none";
+                }
+
+                let hobbies = prompt("Please enter your hobbies:");
+                if(hobbies !== null && hobbies.trim() !== ""){
+                    profile.hobbies = hobbies;
+                    document.getElementById("hobbies").textContent = hobbies;
+                    document.getElementById("hobbies").style.display = "block";
+                } else {
+                    profile.hobbies = null;
+                    document.getElementById("hobbies").style.display = "none";
+                }
+
+                let interestsComplete = isSectionComplete([profile.interests, profile.preferences, profile.hobbies]);
+                if(interestsComplete) completedSteps++;
+                updateProgress(completedSteps, totalSteps);
+            }
+            document.getElementById("section-interests").style.display = "block";
+
+            //Actions taken/Goals/Tasks
+            let skipActions = confirm("Do you want to fill actions section? Click OK to proceed, Cancel to skip entire section for now");
+            if (skipActions){
+                let userActions = prompt("Please enter your actions taken:");
+                if(userActions !== null && userActions.trim() !== ""){
+                    profile.actions = userActions;
+                    document.getElementById("actions").textContent = userActions;
+                    document.getElementById("actions").style.display = "block";
+                } else {
+                    profile.actions = null;
+                    document.getElementById("actions").style.display = "none";
+                }
+
+                let goals = prompt("Please enter your goals:");
+                if(goals !== null && goals.trim() !== ""){
+                    profile.goals = goals;
+                    document.getElementById("goals").textContent = goals;
+                    document.getElementById("goals").style.display = "block";
+                } else {
+                    profile.goals = null;
+                    document.getElementById("goals").style.display = "none";
+                }
+
+                let tasks = prompt("Please enter your tasks:");
+                if(tasks !== null && tasks.trim() !== ""){
+                    profile.tasks = tasks;
+                    document.getElementById("tasks").textContent = tasks;
+                    document.getElementById("tasks").style.display = "block";
+                } else {
+                    profile.tasks = null;
+                    document.getElementById("tasks").style.display = "none";
+                }
+
+                let actionsComplete = isSectionComplete([profile.actions, profile.goals, profile.tasks]);
+                if(actionsComplete) completedSteps++;
+                updateProgress(completedSteps, totalSteps);
+            }
+            document.getElementById("section-actions").style.display = "block";
+            document.getElementById("fill-skipped").style.display = "block";
+        }
+
+        function skipAll(){
+            document.getElementById("make-profile").style.display = "none";
+            document.getElementById("skip-all").style.display = "none";
+            document.getElementById("fill-skipped").style.display = "block";
+        }
+        
+        document.getElementById("fill-skipped").onclick = returnToSkipped;
+    </script>
+</body>
+</html>
